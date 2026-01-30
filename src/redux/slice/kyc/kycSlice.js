@@ -6,7 +6,7 @@ export const fetchAgentDetails = createAsyncThunk(
             const token = localStorage.getItem("authToken");
 
             const res = await fetch(
-                "https://aryo-be-1.onrender.com/api/admin/agent/kyc/requests",
+                "https://softwave-technify-be.onrender.com/api/admin/agent/kyc/requests",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

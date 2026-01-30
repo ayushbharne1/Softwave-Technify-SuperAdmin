@@ -138,7 +138,7 @@ export const fetchProjectTypes = createAsyncThunk(
             console.log("🚀 API CALL: fetchProjectTypes");
 
             const res = await axios.get(
-                "https://aryo-be-1.onrender.com/api/project/types/getall"
+                "https://softwave-technify-be.onrender.com/api/project/types/getall"
             );
 
             console.log("✅ Project Types Response:", res.data.data);

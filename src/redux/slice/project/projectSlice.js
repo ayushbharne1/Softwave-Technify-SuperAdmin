@@ -10,7 +10,7 @@ export const createProject = createAsyncThunk(
       if (!token) return rejectWithValue("Token not found.");
 
       const response = await axios.post(
-        "https://aryo-be-1.onrender.com/api/project/create",
+        "https://softwave-technify-be.onrender.com/api/project/create",
         formData,
         {
           headers: {

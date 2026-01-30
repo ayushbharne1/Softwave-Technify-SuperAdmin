@@ -12,7 +12,7 @@ export const fetchLeadDetails = createAsyncThunk(
 
 
       const response = await fetch(
-        `https://aryo-be-1.onrender.com/api/admin/lead/leadId/${leadId}`,
+        `https://softwave-technify-be.onrender.com/api/admin/lead/leadId/${leadId}`,
         {
           method: "GET",
           headers: {

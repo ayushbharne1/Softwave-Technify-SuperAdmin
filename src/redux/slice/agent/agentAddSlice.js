@@ -55,9 +55,12 @@ const agentSlice = createSlice({
         state.agent = action.payload;
       })
       .addCase(postAgent.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload; // keep as object
-      });
+  state.loading = false;
+  state.error =
+    action.payload?.message ||
+    action.error?.message ||
+    "Something went wrong";
+});
   },
 });
 

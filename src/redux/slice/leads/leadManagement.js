@@ -9,7 +9,7 @@ export const fetchLeads = createAsyncThunk(
       if (!token) return rejectWithValue("Token not found.");
 
       const response = await fetch(
-        "https://aryo-be-1.onrender.com/api/admin/lead",
+        "https://softwave-technify-be.onrender.com/api/admin/lead",
         {
           headers: {
             Authorization: `Bearer ${token}`,
