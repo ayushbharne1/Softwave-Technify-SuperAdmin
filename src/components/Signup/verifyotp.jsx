@@ -126,60 +126,89 @@ export default function VerifyOtp() {
         );
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 via-indigo-300 to-blue-400 px-4">
-            <div className="flex w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden">
+return (
+  <div className="min-h-screen flex items-center justify-center 
+    bg-gradient-to-br from-orange-50 via-white to-blue-50 ">
 
-                <div className="hidden md:flex w-1/2 p-10 items-center justify-center">
-                    <img src={verifyotp} alt="verify otp" className="w-full max-w-sm" />
-                </div>
+    <div className="flex w-full h-screen overflow-hidden 
+      bg-white transition-transform duration-300 ">
 
-                <div className="w-full md:w-1/2 px-10 pt-[80px] bg-white">
+      {/* LEFT SECTION */}
+      <div className="hidden md:flex w-1/2 p-10 items-center justify-center 
+        bg-gradient-to-br from-orange-400 via-orange-500 to-blue-500">
 
-                    <div className="flex justify-center mb-4">
-                        <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center">
-                            <ShieldCheck className="text-blue-600 w-7 h-7" />
-                        </div>
-                    </div>
+        <img
+          src={verifyotp}
+          alt="verify otp"
+          className="w-full max-w-2xl drop-shadow-2xl"
+        />
+      </div>
 
-                    <h2 className="text-3xl font-bold text-blue-600 mb-2 text-center">
-                        Verify OTP
-                    </h2>
+      {/* RIGHT SECTION */}
+      <div className="w-full md:w-1/2 px-10 bg-white flex flex-col justify-center items-center ">
 
-                    <p className="text-gray-600 text-center mb-8">
-                        Please enter the 6 digit OTP
-                    </p>
-
-                    <div className="flex justify-center gap-2 mb-8">
-                        {otp.map((digit, index) => (
-                            <input
-                                key={index}
-                                ref={(el) => (inputsRef.current[index] = el)}
-                                type="text"
-                                inputMode="numeric"
-                                maxLength="1"
-                                value={digit}
-                                onChange={(e) => handleChange(e.target.value, index)}
-                                onKeyDown={(e) => handleKeyDown(e, index)}
-                                onPaste={handlePaste}
-                                className="w-14 h-14 text-center text-xl font-bold rounded-lg border-2 border-blue-300 focus:outline-none focus:ring-blue-500"
-                            />
-                        ))}
-                    </div>
-
-                    <button
-                        onClick={handleVerifyOtp}
-                        disabled={loading}
-                        className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-full font-semibold shadow-lg hover:opacity-90 transition disabled:opacity-60"
-                    >
-                        {loading ? "Verifying..." : "Verify OTP"}
-                    </button>
-
-                    <p className="text-xs text-gray-400 text-center mt-4">
-                        OTP will expire in 10 minutes
-                    </p>
-                </div>
-            </div>
+        {/* ICON */}
+        <div className="flex justify-center mb-4">
+          <div className="w-14 h-14 rounded-full 
+            bg-orange-100 flex items-center justify-center">
+            <ShieldCheck className="text-blue-600 w-7 h-7" />
+          </div>
         </div>
-    );
+
+        <h2 className="text-3xl font-bold text-orange-500 mb-2 text-center">
+          Verify OTP
+        </h2>
+
+        <p className="text-gray-600 text-center mb-8">
+          Please enter the 6 digit OTP
+        </p>
+
+        {/* OTP INPUTS */}
+        <div className="flex justify-center gap-3 mb-8">
+          {otp.map((digit, index) => (
+            <input
+              key={index}
+              ref={(el) => (inputsRef.current[index] = el)}
+              type="text"
+              inputMode="numeric"
+              maxLength="1"
+              value={digit}
+              onChange={(e) => handleChange(e.target.value, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              onPaste={handlePaste}
+              className="
+                w-14 h-14 text-center text-xl font-bold rounded-xl
+                border-2 border-orange-300
+                focus:outline-none
+                focus:border-orange-500
+                focus:ring-2 focus:ring-orange-200
+                transition-all duration-150
+              "
+            />
+          ))}
+        </div>
+
+        {/* VERIFY BUTTON */}
+        <button
+          onClick={handleVerifyOtp}
+          disabled={loading}
+          className="
+            w-1/2 py-3 rounded-full font-semibold text-white
+            bg-orange-500 shadow-lg
+            hover:bg-orange-600 hover:shadow-xl
+            active:scale-95
+            transition-all duration-200
+            disabled:opacity-60
+          "
+        >
+          {loading ? "Verifying..." : "Verify OTP"}
+        </button>
+
+        <p className="text-xs text-gray-400 text-center mt-4">
+          OTP will expire in 10 minutes
+        </p>
+      </div>
+    </div>
+  </div>
+);
 }

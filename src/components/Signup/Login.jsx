@@ -39,68 +39,87 @@ export default function Login() {
     },
   });
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-400 via-indigo-300 to-blue-400 px-4">
-      <div className="flex w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden">
+return (
+  <div className="min-h-screen flex items-center justify-center 
+    bg-gradient-to-br from-orange-50 via-white to-blue-50">
 
-        {/* LEFT SECTION */}
-        <div className="hidden md:flex w-1/2 p-10 items-center justify-center">
-          <img
-            src="https://olx-admin.netlify.app/assets/Tablet%20login-rafiki-CPRoiH2-.png"
-            alt="login"
-            className="w-full max-w-sm"
-          />
-        </div>
+    <div className="flex w-full h-screen overflow-hidden 
+      bg-white transition-transform duration-300 ">
 
-        {/* RIGHT SECTION */}
-        <div className="w-full md:w-1/2 p-8 md:p-12 bg-white flex flex-col justify-center">
-          <h2 className="text-3xl font-bold text-blue-600 mb-2 text-center">
-            Welcome Back
-          </h2>
+      {/* LEFT SECTION */}
+      <div className="hidden md:flex w-1/2 p-10 items-center justify-center 
+        bg-gradient-to-br from-orange-400 via-orange-500 to-blue-500 
+        animate-gradient">
 
-          <p className="text-gray-500 font-medium mb-8 text-center">
-            Login with your registered phone number.
-          </p>
+        <img
+          src="https://olx-admin.netlify.app/assets/Tablet%20login-rafiki-CPRoiH2-.png"
+          alt="login"
+          className="w-full max-w-2xl drop-shadow-2xl"
+        />
+      </div>
 
-          <form onSubmit={formik.handleSubmit} className="space-y-6">
-            {/* phone NUMBER */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                phone Number
-              </label>
+      {/* RIGHT SECTION */}
+      <div className="w-full md:w-1/2 p-8 md:p-12 bg-white flex flex-col justify-center items-center">
 
-              <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400 transition">
-                <Phone className="text-blue-500 w-5 h-5" />
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Enter your phone number"
-                  className="w-full px-3 outline-none text-gray-700 placeholder-gray-400"
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  maxLength={10}
-                />
-              </div>
+        <h2 className="text-3xl font-bold text-orange-500 mb-2 text-center">
+          Welcome Back
+        </h2>
 
-              {formik.touched.phone && formik.errors.phone && (
-                <p className="text-red-500 text-xs mt-1">
-                  {formik.errors.phone}
-                </p>
-              )}
+        <p className="text-gray-500 font-medium mb-8 text-center">
+          Login with your registered phone number
+        </p>
+
+        <form onSubmit={formik.handleSubmit} className="space-y-6">
+
+          {/* PHONE INPUT */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Phone Number
+            </label>
+
+            <div className="flex items-center border border-orange-400 rounded-lg px-3 py-2
+              transition-all duration-200
+              focus-within:border-orange-500
+              focus-within:ring-2 focus-within:ring-orange-200">
+
+              <Phone className="text-orange-500 w-5 h-5" />
+
+              <input
+                type="text"
+                name="phone"
+                placeholder="Enter your phone number"
+                className="w-full px-3 outline-none text-gray-700 placeholder-gray-400 "
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                maxLength={10}
+              />
             </div>
 
-            {/* LOGIN BUTTON */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-500 to-indigo-400 text-white py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:opacity-95 transition duration-200 disabled:opacity-60"
-            >
-              {loading ? "Sending OTP..." : "Send OTP"}
-            </button>
-          </form>
-        </div>
+            {formik.touched.phone && formik.errors.phone && (
+              <p className="text-red-500 text-xs mt-1">
+                {formik.errors.phone}
+              </p>
+            )}
+          </div>
+
+          {/* BUTTON */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-full font-semibold text-white
+              bg-orange-500 shadow-lg
+              hover:bg-orange-600 hover:shadow-xl
+              active:scale-95
+              transition-all duration-200
+              disabled:opacity-60"
+          >
+            {loading ? "Sending OTP..." : "Send OTP"}
+          </button>
+
+        </form>
       </div>
     </div>
-  );
+  </div>
+);
 }
