@@ -157,7 +157,7 @@ export default function CommissionManagement() {
                       <button
                         onClick={() => lockCommission(agent.id)}
                         className="px-4 py-1.5 rounded-lg text-white text-xs font-semibold
-                          bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8]
+                          bg-linear-to-r from-[#0B1C2D] to-[#0E5FD8]
                           shadow-md hover:opacity-90 active:scale-95
                           transition-all"
                       >

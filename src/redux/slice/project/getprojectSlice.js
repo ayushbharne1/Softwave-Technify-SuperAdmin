@@ -144,7 +144,7 @@ export const fetchProjectTypes = createAsyncThunk(
             console.log("✅ Project Types Response:", res.data.data);
             return res.data.data;
         } catch (err) {
-            console.error("❌ fetchProjectTypes ERROR", err);
+            console.error("fetchProjectTypes ERROR", err);
             return rejectWithValue(err.response?.data || err.message);
         }
     }
