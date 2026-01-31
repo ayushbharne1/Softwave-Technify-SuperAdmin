@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen }) => {
           <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 text-orange-500 transform -translate-x-2 group-hover:translate-x-0 transition-all" />
         </NavLink>
 
-        <NavLink to="/projects"
+        <NavLink to="/services"
           className={({ isActive }) =>
             `${baseLink} ${isActive ? active : inactive}`
           }>

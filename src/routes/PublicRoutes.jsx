@@ -57,6 +57,9 @@ import AgentView from "../pages/module/AgentManager/AgentView";
 import ViewKyc from "../pages/module/agentKyc/Viewkyc";
 import AgentEdit from "../pages/module/AgentManager/AgentEdit";
 import Vendor from "../pages/module/vendor/Vendor";
+import Services from "../pages/module/services/Services";
+import ServiceDetails from "../pages/module/services/ServiceDetails";
+import AddService from "../pages/module/services/AddService";
 const PublicRoutes = () => {
   return (
     <>
@@ -64,7 +67,15 @@ const PublicRoutes = () => {
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           {/* project */}
-          <Route path="/projects" element={<Project />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/addservice" element={<AddService/>} />
+           <Route path="/services/:id" element={<ServiceDetails />} />
+
+
+
+
+
+
           <Route path="/projects/add-project" element={<AddProject />} />
           <Route path="/project/credit-card" element={<CreditCard />} />
           <Route path="/project/demat-account" element={<Demataccount />} />
