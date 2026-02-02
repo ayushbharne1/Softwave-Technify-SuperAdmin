@@ -1,33 +1,52 @@
-import { useEffect, useMemo, useState } from "react";
+
+import { useMemo, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { LayoutDashboard } from "lucide-react";
-import StatusBadge from "./StatusBadge";
 import { FiEye } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLeads } from "../../../redux/slice/leads/leadManagement";
-import LoaderSpinner from "../../../components/uiElement/LoaderSpinner";
-//  DUMMY LEADS DATA
+import StatusBadge from "./StatusBadge";
 
-//  LEAD MANAGEMENT
+/* 🔹 STATIC LEADS DATA */
+const LEADS_DATA = [
+  {
+    _id: "mongo1",
+    leadId: "LEAD001",
+    name: "Rahul Sharma",
+    phone: "9876543210",
+    status: "new",
+    productId: { projectType: "Home Loan" },
+    payout: { amount: 5000 },
+  },
+  {
+    _id: "mongo2",
+    leadId: "LEAD002",
+    name: "Amit Verma",
+    phone: "9123456789",
+    status: "approved",
+    productId: { projectType: "Personal Loan" },
+    payout: { amount: 8000 },
+  },
+  {
+    _id: "mongo3",
+    leadId: "LEAD003",
+    name: "Neha Singh",
+    phone: "9001122334",
+    status: "paid",
+    productId: { projectType: "Credit Card" },
+    payout: { amount: 3000 },
+  },
+];
+
 export default function LeadManagement() {
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchLeads());
-  }, [dispatch]);
-
-  const { leads, loading, error } = useSelector((state) => state.leads);
+  const [leads] = useState(LEADS_DATA);
+  const [filter, setFilter] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const normalizeStatus = (status) =>
     status.charAt(0).toUpperCase() + status.slice(1);
 
-  const navigate = useNavigate();
-  const [filter, setFilter] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
-
   const filteredLeads = useMemo(() => {
-
     return leads.filter((lead) => {
       const matchesStatus =
         filter === "All" || normalizeStatus(lead.status) === filter;
@@ -41,75 +60,54 @@ export default function LeadManagement() {
 
       return matchesStatus && matchesSearch;
     });
-
-  }, [leads, filter, searchTerm])
-
-  if (loading) return <div className="text-center mt-10">
-    <LoaderSpinner />
-  </div>;
-  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
-
+  }, [leads, filter, searchTerm]);
 
   return (
     <div className="mt-6 bg-gray-100 min-h-screen">
       {/* HEADER */}
-
-      <div className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8]
-                      rounded-2xl p-6 shadow-lg mb-6 mt-6">
+      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6 mt-6">
         <h1 className="text-2xl font-semibold text-white">Lead Management</h1>
 
         <div className="text-[15px] text-white flex items-center gap-2 mt-2">
-          <NavLink
-            to="/"
-            className="flex items-center gap-1 hover:text-blue-600 transition"
-          >
+          <NavLink to="/" className="flex items-center gap-1">
             <LayoutDashboard size={16} />
           </NavLink>
-
           <span>&gt;</span>
-          <span className="opacity-80">
-            Lead Management
-          </span>
+          <span className="opacity-80">Lead Management</span>
         </div>
       </div>
 
-      {/* FILTER TABS */}
-
+      {/* FILTER */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <input
           type="text"
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full sm:w-64 px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#0E5FD8]"
+          className="w-full sm:w-64 px-3 py-2 border rounded-md text-sm"
         />
 
-        <div className="w-full sm:w-48">
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md text-sm font-medium bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0E5FD8]"
-          >
-            {["All", "New", "Submitted", "Approved", "Rejected", "Paid"].map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-        </div>
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="w-full sm:w-48 px-3 py-2 border rounded-md text-sm"
+        >
+          {["All", "New", "Submitted", "Approved", "Rejected", "Paid"].map(
+            (status) => (
+              <option key={status}>{status}</option>
+            )
+          )}
+        </select>
       </div>
 
       {/* TABLE */}
       <div className="overflow-x-auto p-6 bg-white shadow rounded">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-[#1d476e33] sticky top-0 z-10 ">
-            <tr className="text-black uppercase text-xs tracking-wider">
+          <thead className="bg-[#1d476e33] sticky top-0">
+            <tr className="uppercase text-xs">
               {["Name", "Mobile", "Product", "Status", "Payout", "Action"].map(
                 (col) => (
-                  <th
-                    key={col}
-                    className="p-4 text-center text-sm font-medium "
-                  >
+                  <th key={col} className="p-4 text-center">
                     {col}
                   </th>
                 )
@@ -117,47 +115,37 @@ export default function LeadManagement() {
             </tr>
           </thead>
 
-          <tbody className="bg-white divide-y divide-gray-200">
-            {!loading && filteredLeads.length === 0 && (
+          <tbody>
+            {filteredLeads.length === 0 && (
               <tr>
-                <td
-                  colSpan="6"
-                  className="text-center py-6 text-gray-400"
-                >
+                <td colSpan="6" className="text-center py-6 text-gray-400">
                   No leads found
                 </td>
               </tr>
             )}
 
             {filteredLeads.map((lead) => (
-              <tr
-                key={lead._id}
-                className="hover:bg-gray-50"
-              >
-                <td className="px-6 text-center py-4 font-medium">
-                  {lead?.name || "-"}
+              <tr key={lead._id} className="hover:bg-gray-50">
+                <td className="text-center py-4">{lead.name}</td>
+                <td className="text-center py-4">{lead.phone}</td>
+                <td className="text-center py-4">
+                  {lead.productId.projectType}
                 </td>
-                <td className="px-6 text-center py-4 font-medium">
-                  {lead?.phone || "-"}
-                </td>
-                <td className="px-6 text-center py-4 font-medium">
-                  {lead?.productId?.projectType || "-"}
-                </td>
-                <td className="px-6 py-4 text-center">
+                <td className="text-center py-4">
                   <StatusBadge status={normalizeStatus(lead.status)} />
                 </td>
-                <td className="px-6 py-4 text-center font-medium">
-                  ₹{lead?.payout?.amount ?? 0}
+                <td className="text-center py-4">
+                  ₹{lead.payout.amount}
                 </td>
-                <td className="px-6 text-center py-4">
+                <td className="text-center py-4">
                   <button
-                    title="View"
                     onClick={() =>
-                    {
-                      navigate(`/leadmanagement/lead-details/${lead.leadId}`, {state: {_id: lead._id}})
+                      navigate(
+                        `/leadmanagement/lead-details/${lead.leadId}`,
+                        { state: { lead } }
+                      )
                     }
-                    }
-                    className="text-[#0E5FD8] hover:underline font-medium cursor-pointer"
+                    className="text-[#0E5FD8]"
                   >
                     <FiEye />
                   </button>

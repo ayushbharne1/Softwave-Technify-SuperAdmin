@@ -57,7 +57,7 @@ const AgentKyc = () => {
   return (
     <div className="mt-5 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-6 mt-6">
+      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6 mt-6">
         <h1 className="text-2xl font-semibold text-white">
           Agent KYC Management
         </h1>
