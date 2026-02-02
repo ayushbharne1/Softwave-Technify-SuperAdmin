@@ -4,38 +4,15 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import Dashboard from "../pages/module/dashboard/Dashboard";
-import Project from "../pages/module/projects/Project";
 import LeadManagement from "../pages/module/leadManagement/LeadManagement";
 import PayoutManagement from "../pages/module/payoutManagement/PayoutManagement";
 import AgentKyc from "../pages/module/agentKyc/AgentKyc";
 import ReportAnalysis from "../pages/module/reportAnalysis/ReportAnalysis";
-import AddProject from "../pages/module/projects/AddProject";
-import InstantAccount from "../pages/module/projects/instantloan/InstantLoan";
-import BNPL from "../pages/module/projects/bnpl/BNPL";
-import Investment from "../pages/module/projects/investment/Investment";
-import Demataccount from "../pages/module/projects/Demataccount/Demataccount";
-import DematDetails from "../pages/module/projects/Demataccount/DematDetails";
-
-import SavingAccountDetails from "../pages/module/projects/savingaccount/SavingAccountDetails";
-import InstantLoanDetails from "../pages/module/projects/instantloan/InstantLoanDetails";
-import BNPLdetails from "../pages/module/projects/bnpl/BNPLdetails";
-import UPI from "../pages/module/projects/upi/UPI";
-import BusinessAccount from "../pages/module/projects/businessac/BusinessAccount";
-import PersonalLoan from "../pages/module/projects/personalLoan/PersonalLoan";
-import BusinessLoan from "../pages/module/projects/businessLoan/BusinessLoan";
-import InvestmentDetails from "../pages/module/projects/investment/InvestDetails";
-import BusinessCardDetails from "../pages/module/projects/businessac/BusinessCardDetails";
-import PersonalLoanDetails from "../pages/module/projects/personalLoan/PersonalLoanDetails";
-import CreditCard from "../pages/module/projects/creditCard/CreditCard";
-import CardDetails from "../pages/module/projects/creditCard/CardDetails";
-import SavingAccount from "../pages/module/projects/savingaccount/SavingAccount";
 import AgentManagements from "../pages/module/AgentManager/AgentManager";
 import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
-import BusinessLoanDetails from "../pages/module/projects/businessLoan/BusinessLoanDetails";
 import LeadDetails from "../pages/module/leadManagement/LeadDetails";
 import Notifications from "../pages/module/notifications/Notifications";
 import EligibleAgents from "../pages/module/payoutManagement/EligibleAgents";
-// import GeneratePayout from "../pages/module/payoutManagement/GeneratePayout";
 import PayoutHistory from "../pages/module/payoutManagement/PayoutHistory";
 import Login from "../components/Signup/Login";
 import VerifyOtp from "../components/Signup/verifyotp";
@@ -60,85 +37,21 @@ import Vendor from "../pages/module/vendor/Vendor";
 import Services from "../pages/module/services/Services";
 import ServiceDetails from "../pages/module/services/ServiceDetails";
 import AddService from "../pages/module/services/AddService";
+import VendorDetails from "../pages/module/vendor/VendorDetails";
+import UpdateSetting from "../pages/module/setting/UpdateSetting";
 const PublicRoutes = () => {
   return (
     <>
       <Routes>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          {/* project */}
+          {/* Services start from here */}
           <Route path="/services" element={<Services />} />
           <Route path="/services/addservice" element={<AddService/>} />
            <Route path="/services/:id" element={<ServiceDetails />} />
 
 
 
-
-
-
-          <Route path="/projects/add-project" element={<AddProject />} />
-          <Route path="/project/credit-card" element={<CreditCard />} />
-          <Route path="/project/demat-account" element={<Demataccount />} />
-          <Route path="/project/instant-loan" element={<InstantAccount />} />
-          <Route path="/project/bnpl" element={<BNPL />} />
-          <Route path="/project/investment-account" element={<Investment />} />
-          {/* <Route path='/project/upi' element={<UPI/>}/> */}
-          <Route path="/projects" element={<Project />} />
-          <Route path="/project/add-project" element={<AddProject />} />
-          {/* credit card */}
-          <Route path="/project/credit-card" element={<CreditCard />} />
-          <Route path="/project/credit-card/:id" element={<CardDetails />} />
-
-          {/* demat account */}
-          <Route path="/project/demat-account" element={<Demataccount />} />
-          <Route path="/project/demat/:id" element={<DematDetails />} />
-
-          {/* savings account */}
-          <Route path="/project/savings-account" element={<SavingAccount />} />
-          <Route
-            path="/project/savings/:id"
-            element={<SavingAccountDetails />}
-          />
-
-          {/* instant loan */}
-          <Route path="/project/instant-loan" element={<InstantAccount />} />
-          <Route
-            path="/project/instant-loan/:id"
-            element={<InstantLoanDetails />}
-          />
-
-          {/* bnpl */}
-          <Route path="/project/bnpl" element={<BNPL />} />
-          <Route path="/project/bnpl/:id" element={<BNPLdetails />} />
-
-          <Route path="/project/investment-account" element={<Investment />} />
-          <Route
-            path="/project/investmentdetails/:id"
-            element={<InvestmentDetails />}
-          />
-
-          <Route path="/project/upi" element={<UPI />} />
-
-          <Route
-            path="/project/business-account"
-            element={<BusinessAccount />}
-          />
-          <Route
-            path="/project/business-account/:id"
-            element={<BusinessCardDetails />}
-          />
-
-          <Route path="/project/personal-loan" element={<PersonalLoan />} />
-          <Route
-            path="/project/personal-loan/:id"
-            element={<PersonalLoanDetails />}
-          />
-
-          <Route path="/project/business-loan" element={<BusinessLoan />} />
-          <Route
-            path="/project/businessloan-details/:id"
-            element={<BusinessLoanDetails />}
-          />
 
           {/* agent */}
           {/* <Route path='/agent' element={<AgentManagement />} /> */}
@@ -164,6 +77,7 @@ const PublicRoutes = () => {
           <Route path="/notifications" element={<Notifications />} />
           {/* Vendor */}
           <Route path="/vendor" element={<Vendor />} />
+          <Route path="/vendors/view/:id"element={<VendorDetails/>} />
 
           {/* agent */}
           <Route path="/agent" element={<AgentManagements />} />
@@ -182,13 +96,14 @@ const PublicRoutes = () => {
 
           {/* setting */}
           <Route path="/faqs" element={<Faqs />} />
-          <Route path="faqs/addfaqs" element={<AddFaq />} />
-          <Route path="faqs/viewfaqs/:id" element={<ViewFaq />} />
-          <Route path="faqs/editfaqs/:id" element={<EditFaq />} />
+          <Route path="faqs/add" element={<AddFaq />} />
+          <Route path="faqs/view/:id" element={<ViewFaq />} />
+          <Route path="faqs/edit/:id" element={<EditFaq />} />
 
 
 
           <Route path="/setting" element={<Setting />} />
+          <Route path="/setting/update-setting" element={<UpdateSetting/>} />
         </Route>
 
         <Route path="/" element={<Login />} />

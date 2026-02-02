@@ -61,7 +61,7 @@ const SubAdminManagement = () => {
   return (
     <div className="mt-6">
       {/* HEADER */}
-      <div className="bg-gradient-to-r from-[#0b1c2df4] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-8 mt-6">
+      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-8 mt-6">
         <h1 className="text-2xl font-semibold text-white">
           Sub-Admin Management
         </h1>
