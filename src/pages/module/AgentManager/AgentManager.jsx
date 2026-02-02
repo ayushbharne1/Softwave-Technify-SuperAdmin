@@ -1,54 +1,52 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Edit, LayoutDashboard, Trash } from "lucide-react";
 import { FiEye } from "react-icons/fi";
 
-import { fetchAgents } from "../../../redux/slice/agent/agentGetSlice";
-import { deleteAgentById } from "../../../redux/slice/agent/agentDeleteSlice";
-import { toggleAgentStatus } from "../../../redux/slice/agent/agentStatus";
-
-import LoaderSpinner from "../../../components/uiElement/LoaderSpinner";
-
 export default function AgentManagements() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  // Redux state (error REMOVED)
-  const { agents, loading } = useSelector((state) => state.agentGet);
+  // ✅ STATIC AGENT DATA
+  const [agents, setAgents] = useState([
+    {
+      _id: "1",
+      name: "Rahul Sharma",
+      phone: "9876543210",
+      referralId: "REF1001",
+      isActive: true,
+      kycStatus: "approved",
+    },
+    {
+      _id: "2",
+      name: "Amit Verma",
+      phone: "9123456789",
+      referralId: "REF1002",
+      isActive: false,
+      kycStatus: "pending",
+    },
+  ]);
 
-  // Fetch agents on mount
-  useEffect(() => {
-    dispatch(fetchAgents());
-  }, [dispatch]);
-
-  // Delete agent
+  // ✅ DELETE AGENT (STATIC)
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this agent?")) return;
-    dispatch(deleteAgentById(id));
+    setAgents((prev) => prev.filter((agent) => agent._id !== id));
   };
 
-  // Toggle agent status
-  const handleStatusToggle = async (id) => {
-    const res = await dispatch(toggleAgentStatus(id));
-    if (res.meta.requestStatus === "fulfilled") {
-      dispatch(fetchAgents());
-    }
-  };
-
-  // Loading state
-  if (loading) {
-    return (
-      <div className="flex justify-center mt-20">
-        <LoaderSpinner />
-      </div>
+  // ✅ TOGGLE STATUS (STATIC)
+  const handleStatusToggle = (id) => {
+    setAgents((prev) =>
+      prev.map((agent) =>
+        agent._id === id
+          ? { ...agent, isActive: !agent.isActive }
+          : agent
+      )
     );
-  }
+  };
 
   return (
     <div className="mt-5 bg-gray-100 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-6 mt-6">
+      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6 mt-6">
         <h1 className="text-2xl font-semibold text-white">
           Agents Management
         </h1>
@@ -65,16 +63,6 @@ export default function AgentManagements() {
             Agents Management
           </span>
         </div>
-      </div>
-
-      {/* Add Button */}
-      <div className="flex justify-between items-center mb-6">
-        <button
-          className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] text-white px-4 py-2 rounded hover:opacity-90 transition"
-          onClick={() => navigate("/agent/form")}
-        >
-          Add Agent
-        </button>
       </div>
 
       {/* Table */}
@@ -98,7 +86,7 @@ export default function AgentManagements() {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {agents?.length === 0 && (
+            {agents.length === 0 && (
               <tr>
                 <td colSpan="6" className="text-center py-10 text-gray-400">
                   No agents found
@@ -106,24 +94,24 @@ export default function AgentManagements() {
               </tr>
             )}
 
-            {agents?.map((agent) => (
+            {agents.map((agent) => (
               <tr
                 key={agent._id}
                 className="hover:bg-blue-50 transition"
               >
                 {/* Name */}
                 <td className="px-6 py-4 text-center font-semibold">
-                  {agent.name || "—"}
+                  {agent.name}
                 </td>
 
                 {/* Phone */}
                 <td className="px-6 py-4 text-center">
-                  {agent.phone || "—"}
+                  {agent.phone}
                 </td>
 
                 {/* Referral */}
                 <td className="px-6 py-4 text-center">
-                  {agent.referralId || "—"}
+                  {agent.referralId}
                 </td>
 
                 {/* Status */}
@@ -142,27 +130,16 @@ export default function AgentManagements() {
 
                 {/* KYC */}
                 <td className="px-6 py-4 text-center capitalize">
-                  {agent.kycStatus || "pending"}
+                  {agent.kycStatus}
                 </td>
 
                 {/* Actions */}
                 <td className="px-6 py-4 text-center">
                   <button
-                    onClick={() =>
-                      navigate(`/agent/view/${agent._id}`)
-                    }
+                    onClick={() => navigate(`/agent/view/${agent._id}`)}
                     className="px-2 py-1 text-blue-600"
                   >
                     <FiEye size={18} />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      navigate(`/agent/edit/${agent._id}`)
-                    }
-                    className="px-2 py-1 text-green-600"
-                  >
-                    <Edit size={18} />
                   </button>
 
                   <button
