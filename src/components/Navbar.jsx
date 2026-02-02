@@ -170,7 +170,7 @@ const Navbar = ({ onToggle }) => {
                 </NavLink>
 
                 <NavLink
-                  to="/settings"
+                  to="/setting"
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600 transition-all duration-200 group"
                 >

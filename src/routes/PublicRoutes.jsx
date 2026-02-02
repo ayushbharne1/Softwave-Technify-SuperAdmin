@@ -9,7 +9,6 @@ import PayoutManagement from "../pages/module/payoutManagement/PayoutManagement"
 import AgentKyc from "../pages/module/agentKyc/AgentKyc";
 import ReportAnalysis from "../pages/module/reportAnalysis/ReportAnalysis";
 import AgentManagements from "../pages/module/AgentManager/AgentManager";
-import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
 import LeadDetails from "../pages/module/leadManagement/LeadDetails";
 import Notifications from "../pages/module/notifications/Notifications";
 import EligibleAgents from "../pages/module/payoutManagement/EligibleAgents";
@@ -32,7 +31,6 @@ import EditFaq from "../pages/module/faqs/EditFaqs";
 import CommissionManagement from "../pages/module/commisionManagement/CommisionManagement";
 import AgentView from "../pages/module/AgentManager/AgentView";
 import ViewKyc from "../pages/module/agentKyc/Viewkyc";
-import AgentEdit from "../pages/module/AgentManager/AgentEdit";
 import Vendor from "../pages/module/vendor/Vendor";
 import Services from "../pages/module/services/Services";
 import ServiceDetails from "../pages/module/services/ServiceDetails";
@@ -50,12 +48,8 @@ const PublicRoutes = () => {
           <Route path="/services/addservice" element={<AddService/>} />
            <Route path="/services/:id" element={<ServiceDetails />} />
 
+           
 
-
-
-          {/* agent */}
-          {/* <Route path='/agent' element={<AgentManagement />} /> */}
-          {/* <Route path="/financial" element={<FinancialProductManagement />} /> */}
           <Route path="/leadmanagement" element={<LeadManagement />} />
           <Route path="/leadmanagement/lead-details/:leadId" element={<LeadDetails />} />
 
@@ -81,9 +75,7 @@ const PublicRoutes = () => {
 
           {/* agent */}
           <Route path="/agent" element={<AgentManagements />} />
-          <Route path="/agent/form" element={<AgentFormPage />} />
           <Route path="/agent/view/:id" element={<AgentView />} />
-          <Route path="/agent/edit/:id" element={<AgentEdit />} />
 
 
           {/* profile */}
