@@ -41,14 +41,14 @@ export default function Login() {
 
 return (
   <div className="min-h-screen flex items-center justify-center 
-    bg-gradient-to-br from-orange-50 via-white to-blue-50">
+    bg-linear-to-br from-orange-50 via-white to-blue-50">
 
     <div className="flex w-full h-screen overflow-hidden 
       bg-white transition-transform duration-300 ">
 
       {/* LEFT SECTION */}
       <div className="hidden md:flex w-1/2 p-10 items-center justify-center 
-        bg-gradient-to-br from-orange-400 via-orange-500 to-blue-500 
+        bg-linear-to-br from-orange-400 via-orange-500 to-blue-500 
         animate-gradient">
 
         <img
