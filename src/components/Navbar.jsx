@@ -24,13 +24,13 @@ const Navbar = ({ onToggle }) => {
   };
 
   return (
-    <header className="fixed top-0 right-0 w-[82vw] h-16 bg-gradient-to-r from-orange-50 to-white text-gray-800 flex items-center justify-between px-6 z-50 border-b border-orange-200 shadow-lg">
+    <header className="fixed top-0 right-0 w-[82vw] h-16 bg-linear-to-r from-orange-50 to-white text-gray-800 flex items-center justify-between px-6 z-50 border-b border-orange-200 shadow-lg">
 
       {/* Left Section - Breadcrumb & Title */}
       <div className="flex items-center gap-6">
         <button 
           onClick={onToggle} 
-          className="md:hidden p-2.5 rounded-lg bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white transition-all duration-300 shadow-md hover:shadow-lg"
+          className="md:hidden p-2.5 rounded-lg bg-linear-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white transition-all duration-300 shadow-md hover:shadow-lg"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -51,13 +51,13 @@ const Navbar = ({ onToggle }) => {
 
         {/* Notification */}
         <div className="relative group">
-          <div className="relative p-2.5 rounded-full bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 transition-all duration-300 cursor-pointer border border-orange-200 shadow-sm hover:shadow-md">
+          <div className="relative p-2.5 rounded-full bg-linear-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 transition-all duration-300 cursor-pointer border border-orange-200 shadow-sm hover:shadow-md">
             <Bell className="w-5 h-5 text-orange-600 group-hover:text-orange-700 group-hover:scale-110 transition-all duration-300" />
             
             {/* Notification Badge */}
             {notifications > 0 && (
               <>
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-md animate-pulse">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-linear-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-xs font-bold text-white shadow-md animate-pulse">
                   {notifications}
                 </span>
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-orange-400/50 rounded-full animate-ping"></div>
@@ -106,7 +106,7 @@ const Navbar = ({ onToggle }) => {
           className="flex items-center gap-2 cursor-pointer group relative"
         >
           {/* Animated Background Ring */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 via-orange-300/10 to-orange-400/20 rounded-full blur-sm group-hover:blur-md transition-all duration-500"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-orange-400/20 via-orange-300/10 to-orange-400/20 rounded-full blur-sm group-hover:blur-md transition-all duration-500"></div>
           
           {/* Profile Content */}
           <div className="relative flex items-center gap-3 bg-white px-4 py-2 rounded-full border border-orange-200 group-hover:border-orange-400  transition-all duration-300">
@@ -138,7 +138,7 @@ const Navbar = ({ onToggle }) => {
           {open && (
             <div className="absolute right-0 top-12 w-56 bg-white text-gray-700 rounded-xl shadow-2xl overflow-hidden border border-orange-200 z-50 animate-in slide-in-from-top-5 duration-300">
               {/* Header */}
-              <div className="p-4 bg-gradient-to-r from-orange-50 to-orange-100 border-b border-orange-200">
+              <div className="p-4 bg-linear-to-r from-orange-50 to-orange-100 border-b border-orange-200">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <img
@@ -161,7 +161,7 @@ const Navbar = ({ onToggle }) => {
                 <NavLink
                   to="/profile"
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 hover:text-orange-600 transition-all duration-200 group"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-linear-to-r hover:from-orange-50 hover:to-orange-100 hover:text-orange-600 transition-all duration-200 group"
                 >
                   <div className="p-1.5 rounded-lg bg-orange-100 group-hover:bg-orange-200">
                     <User className="w-4 h-4 text-orange-600" />
@@ -170,9 +170,9 @@ const Navbar = ({ onToggle }) => {
                 </NavLink>
 
                 <NavLink
-                  to="/settings"
+                  to="/setting"
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600 transition-all duration-200 group"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-linear-to-r hover:from-blue-50 hover:to-blue-100 hover:text-blue-600 transition-all duration-200 group"
                 >
                   <div className="p-1.5 rounded-lg bg-blue-100 group-hover:bg-blue-200">
                     <div className="w-4 h-4 flex items-center justify-center">
@@ -182,11 +182,11 @@ const Navbar = ({ onToggle }) => {
                   <span>Settings</span>
                 </NavLink>
 
-                <div className="h-px bg-gradient-to-r from-transparent via-orange-200 to-transparent my-2"></div>
+                <div className="h-px bg-linear-to-r from-transparent via-orange-200 to-transparent my-2"></div>
 
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-red-700 transition-all duration-200 group"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-600 hover:bg-linear-to-r hover:from-red-50 hover:to-red-100 hover:text-red-700 transition-all duration-200 group"
                 >
                   <div className="p-1.5 rounded-lg bg-red-100 group-hover:bg-red-200">
                     <LogOut className="w-4 h-4 text-red-600" />
@@ -196,7 +196,7 @@ const Navbar = ({ onToggle }) => {
               </div>
 
               {/* Footer */}
-              <div className="p-3 bg-gradient-to-r from-orange-50 to-white border-t border-orange-200">
+              <div className="p-3 bg-linear-to-r from-orange-50 to-white border-t border-orange-200">
                 <p className="text-xs text-gray-500 text-center">
                   SoftwaveTechnify • v1.0
                 </p>

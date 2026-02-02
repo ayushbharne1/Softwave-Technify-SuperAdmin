@@ -68,9 +68,9 @@ const ReportsAnalysis = () => {
   };
 
   return (
-    <div className="p-6 bg-gradient-to-br from-gray-50 to-white min-h-screen">
+    <div className="p-6 bg-linear-to-br from-gray-50 to-white min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
+      <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white flex items-center gap-3">
@@ -105,7 +105,7 @@ const ReportsAnalysis = () => {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-2.5 rounded-lg font-medium transition-all duration-300 ${activeTab === tab
-                ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-md"
+                ? "bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-md"
                 : "text-gray-600 hover:text-orange-600 hover:bg-orange-50"
                 }`}
             >
@@ -137,12 +137,12 @@ const ReportsAnalysis = () => {
         <div className="flex gap-2">
           <button
             onClick={() => exportExcel(getChartData(), `${activeTab}_report`)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all duration-300"
+            className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-emerald-500 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all duration-300"
           >
             <Download className="w-4 h-4" />
             Export Excel
           </button>
-          <button className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300">
+          <button className="flex items-center gap-2 px-4 py-2.5 bg-linear-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all duration-300">
             <Printer className="w-4 h-4" />
             Print Report
           </button>
@@ -151,22 +151,22 @@ const ReportsAnalysis = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
+        <div className="bg-linear-to-r from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
           <p className="text-sm text-gray-600">Total Leads</p>
           <p className="text-2xl font-bold text-orange-700">97</p>
           <p className="text-xs text-orange-600 mt-1">↑ 12% from last week</p>
         </div>
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
+        <div className="bg-linear-to-r from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
           <p className="text-sm text-gray-600">Conversion Rate</p>
           <p className="text-2xl font-bold text-blue-700">64.3%</p>
           <p className="text-xs text-blue-600 mt-1">↑ 8% from last week</p>
         </div>
-        <div className="bg-gradient-to-r from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200">
+        <div className="bg-linear-to-r from-emerald-50 to-emerald-100 rounded-xl p-4 border border-emerald-200">
           <p className="text-sm text-gray-600">Revenue Generated</p>
           <p className="text-2xl font-bold text-emerald-700">₹1.23Cr</p>
           <p className="text-xs text-emerald-600 mt-1">↑ 18% from last week</p>
         </div>
-        <div className="bg-gradient-to-r from-violet-50 to-violet-100 rounded-xl p-4 border border-violet-200">
+        <div className="bg-linear-to-r from-violet-50 to-violet-100 rounded-xl p-4 border border-violet-200">
           <p className="text-sm text-gray-600">Active Agents</p>
           <p className="text-2xl font-bold text-violet-700">24</p>
           <p className="text-xs text-violet-600 mt-1">↑ 5 from last month</p>
@@ -253,7 +253,7 @@ const ReportsAnalysis = () => {
 
             {/* Table */}
             <div className="rounded-xl border border-gray-200 overflow-hidden">
-              <div className="bg-gradient-to-r from-orange-50 to-orange-100 px-6 py-4 border-b border-orange-200">
+              <div className="bg-linear-to-r from-orange-50 to-orange-100 px-6 py-4 border-b border-orange-200">
                 <h3 className="font-semibold text-gray-800">Lead Conversion Details</h3>
               </div>
               <div className="overflow-x-auto">
@@ -341,7 +341,7 @@ const ReportsAnalysis = () => {
 
             {/* Table */}
             <div className="rounded-xl border border-gray-200 overflow-hidden">
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-6 py-4 border-b border-blue-200">
+              <div className="bg-linear-to-r from-blue-50 to-blue-100 px-6 py-4 border-b border-blue-200">
                 <h3 className="font-semibold text-gray-800">Agent Performance Ranking</h3>
               </div>
               <div className="overflow-x-auto">
@@ -363,7 +363,7 @@ const ReportsAnalysis = () => {
                         <tr key={agent.name} className="hover:bg-gray-50">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 flex items-center justify-center text-white text-sm font-bold">
+                              <div className="w-8 h-8 rounded-full bg-linear-to-r from-orange-400 to-orange-500 flex items-center justify-center text-white text-sm font-bold">
                                 {index + 1}
                               </div>
                               <span className="font-medium">{agent.name}</span>
@@ -459,7 +459,7 @@ const ReportsAnalysis = () => {
 
             {/* Table */}
             <div className="rounded-xl border border-gray-200 overflow-hidden">
-              <div className="bg-gradient-to-r from-violet-50 to-violet-100 px-6 py-4 border-b border-violet-200">
+              <div className="bg-linear-to-r from-violet-50 to-violet-100 px-6 py-4 border-b border-violet-200">
                 <h3 className="font-semibold text-gray-800">Product Performance Details</h3>
               </div>
               <div className="overflow-x-auto">
@@ -506,7 +506,7 @@ const ReportsAnalysis = () => {
       </div>
 
       {/* Insights Section */}
-      <div className="mt-8 bg-gradient-to-r from-orange-50 to-white rounded-2xl p-6 border border-orange-100">
+      <div className="mt-8 bg-linear-to-r from-orange-50 to-white rounded-2xl p-6 border border-orange-100">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">📈 Key Insights</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="p-4 bg-white rounded-xl border border-orange-200">

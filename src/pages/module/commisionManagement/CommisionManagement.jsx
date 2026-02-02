@@ -41,7 +41,7 @@ export default function CommissionManagement() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-6 mt-6">
+      <div className="bg-linear-to-r from-[#0B1C2D] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-6 mt-6">
         <h1 className="text-2xl font-semibold text-white">
           Commission Management
         </h1>

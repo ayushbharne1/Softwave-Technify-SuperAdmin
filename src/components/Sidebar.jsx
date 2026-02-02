@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen }) => {
   return (
 <aside
   className={`fixed top-0 left-0 w-[17vw] h-screen
-  bg-gradient-to-b from-white to-gray-50 text-gray-800
+  bg-linear-to-b from-white to-gray-50 text-gray-800
   transform ${isOpen ? "translate-x-0" : "-translate-x-full"}
   transition-all duration-300 ease-in-out
   md:translate-x-0 z-40
@@ -37,14 +37,14 @@ const Sidebar = ({ isOpen }) => {
 >
       {/* LOGO */}
       <div className="h-20 flex items-center justify-center px-6 
-        border-b border-orange-100 shrink-0 bg-gradient-to-r from-white to-orange-50">
+        border-b border-orange-100 shrink-0 bg-linear-to-r from-white to-orange-50">
         <div className="relative">
           <img
             src={aryoLogo}
             alt="Softwave Tecnify Logo"
             className="w-40 object-contain drop-shadow-lg"
           />
-          <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400 rounded-full"></div>
+          <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-linear-to-r from-orange-400 via-orange-500 to-orange-400 rounded-full"></div>
         </div>
       </div>
 
