@@ -7,12 +7,12 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
     <div className="w-full min-h-screen overflow-x-hidden">
       {/* Header / Breadcrumb */}
       <div
-        className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8]
+        className="bg-gradient-to-r from-[#F7941D] to-[#0072BC]
         rounded-2xl p-6 shadow-lg mb-6"
       >
         <h1 className="text-xl font-semibold text-white">Add Agents</h1>
 
-        <div className="text-sm text-white flex items-center gap-2 mt-2">
+        <div className="text-sm text-white flex items-center gap-2 mt-3">
           <NavLink to="/dashboard" className="hover:text-blue-600">
             <LayoutDashboard size={16} />
           </NavLink>
@@ -21,7 +21,7 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
             Agents Management
           </NavLink>
           <span>&gt;</span>
-          <span className="text-blue-600 font-medium">{title}</span>
+          <span className=" font-medium">{title}</span>
         </div>
       </div>
 

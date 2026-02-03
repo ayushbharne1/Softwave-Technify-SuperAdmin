@@ -64,7 +64,7 @@ export default function AgentManagements() {
   return (
     <div className="mt-5 bg-gray-100 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] rounded-2xl p-6 shadow-lg mb-6 mt-6">
+      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6 mt-6">
         <h1 className="text-2xl font-semibold text-white">Agents Managements</h1>
         <div className="text-[15px] text-white flex items-center gap-2 mt-2">
           <NavLink
@@ -82,7 +82,7 @@ export default function AgentManagements() {
 
       <div className="flex justify-between items-center mb-6">
         <button
-          className="bg-gradient-to-r from-[#0B1C2D] to-[#0E5FD8] text-white px-4 py-2 rounded hover:bg-blue-900"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
           onClick={() => navigate("/agent/form")}
         >
           Add Agent

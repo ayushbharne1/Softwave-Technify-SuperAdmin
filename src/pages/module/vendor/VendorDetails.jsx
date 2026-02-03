@@ -1,24 +1,44 @@
+
 import { LayoutDashboard, CheckCircle, XCircle } from "lucide-react";
 import React, { useState } from "react";
-import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 
 const VendorDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
-  // 🔹 Vendor Data (static for now)
-  const vendor = {
-    vendorName: "HDFC Bank",
-    vendorType: "Bank",
-    totalLinksShared: 520,
-    totalClicks: 410,
-    totalLeads: 180,
-    approvedLeads: 120,
-    commission: 86000,
-  };
+  // 🔹 Vendor Data (static)
+  const vendorList = [
+    {
+      id: "1",
+      vendorName: "Abhishek Sharma",
+      vendorType: "Affiliate",
+      executive: 5,
+      pending: 10,
+      totalLeads: 180,
+      approvedLeads: 120,
+      amount: 46000,
+    },
+    {
+      id: "2",
+      vendorName: "Rahul Roy",
+      vendorType: "Channel Partner",
+      executive: 3,
+      pending: 10,
+      totalLeads: 180,
+      approvedLeads: 55,
+      amount: 86000,
+    },
+  ];
+
+  // 🔹 Find vendor by id
+  const vendor =
+    vendorList.find((v) => v.id === id) || vendorList[0];
 
   // 🔹 Status State
-  const [status, setStatus] = useState("pending"); // approved | rejected | pending
+  const [status, setStatus] = useState("pending");
+
+  // 🔹 20% Commission Calculation
+  const commissionAmount = Math.round(vendor.amount * 0.2);
 
   const getStatusBadge = () => {
     if (status === "approved")
@@ -84,13 +104,13 @@ const VendorDetails = () => {
           </div>
 
           <div className="bg-orange-50 p-4 rounded-lg">
-            <p className="text-gray-500">Links Shared</p>
-            <p className="font-semibold">{vendor.totalLinksShared}</p>
+            <p className="text-gray-500">Executive</p>
+            <p className="font-semibold">{vendor.executive}</p>
           </div>
 
           <div className="bg-orange-50 p-4 rounded-lg">
-            <p className="text-gray-500">Clicks</p>
-            <p className="font-semibold">{vendor.totalClicks}</p>
+            <p className="text-gray-500">Pending</p>
+            <p className="font-semibold">{vendor.pending}</p>
           </div>
 
           <div className="bg-orange-50 p-4 rounded-lg">
@@ -106,9 +126,9 @@ const VendorDetails = () => {
           </div>
 
           <div className="bg-orange-50 p-4 rounded-lg md:col-span-2">
-            <p className="text-gray-500">Total Commission</p>
+            <p className="text-gray-500">Total amount</p>
             <p className="font-semibold text-lg text-blue-600">
-              ₹{vendor.commission}
+              ₹{commissionAmount.toLocaleString()}
             </p>
           </div>
         </div>
@@ -130,7 +150,6 @@ const VendorDetails = () => {
               <XCircle size={16} /> Reject
             </button>
           </div>
-
         </div>
       </div>
     </div>
