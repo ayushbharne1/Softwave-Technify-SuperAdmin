@@ -1,168 +1,244 @@
-import { Edit, LayoutDashboard } from "lucide-react";
-import React from "react";
+import { Edit, LayoutDashboard, Eye, Trash2, PlusCircle, Filter, Search } from "lucide-react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Eye, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Vendor = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
   const vendors = [
     {
       id: 1,
-      vendorName: "Abhishekh sharma",
+      vendorName: "Abhishekh Sharma",
       executive: 3,
       pending: 10,
       totalLeads: 180,
       approvedLeads: 120,
+      commission: "15%"
     },
     {
       id: 2,
-      vendorName: "Rahul roy",
+      vendorName: "Rahul Roy",
       executive: 3,
       pending: 10,
       totalLeads: 90,
       approvedLeads: 55,
+      commission: "12%"
+    },
+    {
+      id: 3,
+      vendorName: "Priya Patel",
+      executive: 2,
+      pending: 5,
+      totalLeads: 120,
+      approvedLeads: 85,
+      commission: "18%"
+    },
+    {
+      id: 4,
+      vendorName: "Amit Verma",
+      executive: 4,
+      pending: 15,
+      totalLeads: 200,
+      approvedLeads: 140,
+      commission: "20%"
+    },
+    {
+      id: 5,
+      vendorName: "Neha Singh",
+      executive: 2,
+      pending: 3,
+      totalLeads: 75,
+      approvedLeads: 50,
+      commission: "10%"
     },
   ];
 
-  // const getStatusBadge = (approved, total) => {
-  //   const rate = (approved / total) * 100;
-
-  //   if (rate >= 70) return "bg-green-100 text-green-700";
-  //   if (rate >= 40) return "bg-yellow-100 text-yellow-700";
-  //   return "bg-red-100 text-red-700";
-  // };
-  const navigate = useNavigate();
+  const filteredVendors = vendors.filter(vendor => 
+    vendor.vendorName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="mt-6 bg-gray-100 min-h-screen">
+    <div className="p-6 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6">
-        <h1 className="text-2xl font-semibold text-white">Vendor Management</h1>
-
-        <div className="text-sm text-white flex items-center gap-2 mt-2">
-          <NavLink to="/dashboard" className="flex items-center gap-1">
-            <LayoutDashboard size={16} />
-          </NavLink>
-          <span>&gt;</span>
-          <span>Vendor Analytics</span>
+      <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white">Vendor Management</h1>
+            <div className="text-sm text-orange-100 flex items-center gap-2 mt-3">
+              <NavLink to="/dashboard" className="flex items-center gap-1 hover:text-white transition-colors">
+                <LayoutDashboard size={16} />
+              </NavLink>
+              <span className="text-white/60">›</span>
+              <span className="text-white font-medium">Vendor Analytics</span>
+            </div>
+          </div>
+          <div className="bg-white/20 px-4 py-2 rounded-lg">
+            <p className="text-white text-sm">{vendors.length} Total Vendors</p>
+          </div>
         </div>
       </div>
 
- {/* Add vendor */}
-          <div className="flex justify-between items-center mb-6">
+      {/* Controls Bar */}
+      <div className="flex flex-col md:flex-row gap-4 mb-8">
+        {/* Search Bar */}
+        <div className="flex-1 relative">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            placeholder="Search vendors by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 bg-white shadow-sm placeholder-gray-400"
+          />
+        </div>
+
+        {/* Add Vendor Button */}
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
+          className="flex items-center gap-2 px-5 py-3 bg-linear-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
           onClick={() => navigate("/vendor/addvendor")}
         >
+          <PlusCircle className="w-5 h-5" />
           Add Vendor
         </button>
       </div>
-      {/* Table */}
-      <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-xl font-semibold mb-5">
-          Vendor Referral Analytics
-        </h2>
 
-       
+      {/* Table Section */}
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+        {/* Table Header */}
+        <div className="px-6 py-4 border-b border-gray-200 bg-linear-to-r from-gray-50 to-white">
+          <h2 className="text-xl font-bold text-gray-800">Vendor Referral Analytics</h2>
+        </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            {/* TABLE HEAD */}
-            <thead className="bg-[#1d476e33] sticky top-0 z-10">
-              <tr className="text-black uppercase text-xs tracking-wider">
-                {[
-                  "Vendor",
-                  "Executive",
-                  "Pending",
-                  "Approved",
-                  "Rejected",
-                  "Commission",
-                  "Actions",
-                ].map((col) => (
-                  <th key={col} className="p-4 text-center text-sm font-medium">
-                    {col}
-                  </th>
-                ))}
+          <table className="w-full">
+            {/* Table Head */}
+            <thead className="bg-linear-to-r from-gray-50 to-gray-100">
+              <tr className="text-sm text-gray-700">
+                <th className="px-6 py-4 text-left font-semibold">Vendor</th>
+                <th className="px-6 py-4 text-left font-semibold">Executive</th>
+                <th className="px-6 py-4 text-left font-semibold">Pending</th>
+                <th className="px-6 py-4 text-left font-semibold">Total Leads</th>
+                <th className="px-6 py-4 text-left font-semibold">Approved</th>
+                <th className="px-6 py-4 text-left font-semibold">Rejected</th>
+                <th className="px-6 py-4 text-left font-semibold">Commission</th>
+                <th className="px-6 py-4 text-left font-semibold">Actions</th>
               </tr>
             </thead>
 
-            {/* TABLE BODY */}
-            <tbody className="bg-white border-b border-gray-200 divide-y divide-gray-200">
-              {vendors.length === 0 && (
+            {/* Table Body */}
+            <tbody className="divide-y divide-gray-200">
+              {filteredVendors.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="text-center py-6 text-gray-400">
-                    No vendor data found
+                  <td colSpan="8" className="px-6 py-12 text-center">
+                    <div className="flex flex-col items-center justify-center">
+                      <Search className="w-12 h-12 text-gray-300 mb-4" />
+                      <h3 className="text-lg font-semibold text-gray-700 mb-2">No vendors found</h3>
+                      <p className="text-gray-500">Try adjusting your search criteria</p>
+                    </div>
                   </td>
                 </tr>
+              ) : (
+                filteredVendors.map((vendor) => {
+                  const rejectedLeads = vendor.totalLeads - vendor.approvedLeads;
+                  const conversionRate = ((vendor.approvedLeads / vendor.totalLeads) * 100).toFixed(0);
+
+                  return (
+                    <tr key={vendor.id} className="hover:bg-gray-50 transition-colors">
+                      {/* Vendor Name */}
+                      <td className="px-6 py-4">
+                        <p className="font-semibold text-gray-800">{vendor.vendorName}</p>
+                      </td>
+
+                      {/* Executive */}
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
+                          {vendor.executive}
+                        </span>
+                      </td>
+
+                      {/* Pending */}
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-sm font-medium">
+                          {vendor.pending}
+                        </span>
+                      </td>
+
+                      {/* Total Leads */}
+                      <td className="px-6 py-4">
+                        <span className="font-semibold text-gray-800">{vendor.totalLeads}</span>
+                      </td>
+
+                      {/* Approved */}
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+                          {vendor.approvedLeads}
+                        </span>
+                      </td>
+
+                      {/* Rejected */}
+                      <td className="px-6 py-4">
+                        <span className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm font-medium">
+                          {rejectedLeads}
+                        </span>
+                      </td>
+
+                      {/* Commission */}
+                      <td className="px-6 py-4">
+                        <div className="bg-linear-to-r from-emerald-50 to-emerald-100 p-2 rounded-lg">
+                          <p className="text-center font-bold text-emerald-700">{vendor.commission}</p>
+                        </div>
+                      </td>
+
+                      {/* Actions */}
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <button
+                            onClick={() => navigate(`/vendor/view/${vendor.id}`)}
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            title="View Details"
+                          >
+                            <Eye className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => navigate(`/vendor/edit/${vendor.id}`)}
+                            className="p-2 text-orange-600 hover:bg-orange-50 rounded-lg transition-colors"
+                            title="Edit Vendor"
+                          >
+                            <Edit className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => alert(`Delete Vendor ID: ${vendor.id}`)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Delete Vendor"
+                          >
+                            <Trash2 className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
-
-              {vendors.map((v) => {
-                const rejectedLeads = v.totalLeads - v.approvedLeads;
-
-                const conversionRate = Math.min(
-                  (v.approvedLeads / v.totalLeads) * 100,
-                  20,
-                ).toFixed(0);
-
-                return (
-                  <tr key={v.id} className="hover:bg-gray-50 transition">
-                    {/* Vendor */}
-                    <td className="px-6 py-4 font-medium text-center">
-                      {v.vendorName}
-                    </td>
-
-                    {/* Executive */}
-                    <td className="px-6 py-4 font-medium text-center">
-                      {v.executive}
-                    </td>
-
-                    {/* Pending */}
-                    <td className="px-6 py-4 font-medium text-center">
-                      {v.pending}
-                    </td>
-
-                    {/* Approved */}
-                    <td className="px-6 py-4 text-center">
-                      <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
-                        {v.approvedLeads}
-                      </span>
-                    </td>
-
-                    {/* Rejected */}
-                    <td className="px-6 py-4 text-center">
-                      <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-medium">
-                        {rejectedLeads}
-                      </span>
-                    </td>
-
-                    {/* Commission % */}
-                    <td className="px-5 py-4 text-center">{conversionRate}%</td>
-
-                    {/* Actions */}
-                    <td className="px-5 py-4">
-                      <div className="flex gap-3 justify-center">
-                        <Eye
-                          size={18}
-                          className="text-blue-600 cursor-pointer"
-                          onClick={() => navigate(`/vendor/view/${v.id}`)}
-                        />
-                         <Edit
-                          size={18}
-                          className="text-blue-600 cursor-pointer"
-                          onClick={() => navigate(`/vendor/edit/${v.id}`)}
-                        />
-                        <Trash2
-                          size={18}
-                          className="text-red-600 cursor-pointer"
-                          onClick={() => alert(`Delete Vendor ID: ${v.id}`)}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
             </tbody>
           </table>
+        </div>
+
+        {/* Table Footer */}
+        <div className="px-6 py-4 border-t border-gray-200 bg-linear-to-r from-gray-50 to-white">
+          <div className="flex items-center justify-between text-sm text-gray-600">
+            <span>Showing {filteredVendors.length} of {vendors.length} vendors</span>
+            <div className="flex items-center gap-4">
+              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                Previous
+              </button>
+              <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg">1</span>
+              <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
