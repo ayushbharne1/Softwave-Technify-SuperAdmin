@@ -40,6 +40,7 @@ import UpdateSetting from "../pages/module/setting/UpdateSetting";
 import AgentEdit from "../pages/module/AgentManager/AgentEdit";
 import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
 import AddVendor from "../pages/module/vendor/AddVendor";
+import AddCategory from "../pages/module/services/AddCategory";
 import EditVendor from "../pages/module/vendor/EditVendor";
 const PublicRoutes = () => {
   return (
@@ -50,6 +51,7 @@ const PublicRoutes = () => {
           {/* Services start from here */}
           <Route path="/services" element={<Services />} />
           <Route path="/services/addservice" element={<AddService/>} />
+          <Route path="/services/addcategory" element={<AddCategory/>} />
            <Route path="/services/:id" element={<ServiceDetails />} />
 
            
