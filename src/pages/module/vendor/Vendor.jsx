@@ -116,14 +116,15 @@ const Vendor = () => {
             {/* Table Head */}
             <thead className="bg-linear-to-r from-gray-50 to-gray-100">
               <tr className="text-sm text-gray-700">
+                <th className="px-6 py-4 text-left font-semibold">Sr. No</th>
                 <th className="px-6 py-4 text-left font-semibold">Vendor</th>
-                <th className="px-6 py-4 text-left font-semibold">Executive</th>
+                <th className="px-5 py-4 text-left font-semibold">Executive</th>
                 <th className="px-6 py-4 text-left font-semibold">Pending</th>
-                <th className="px-6 py-4 text-left font-semibold">Total Leads</th>
+                <th className="px-5 py-4 text-left font-semibold">Total Leads</th>
                 <th className="px-6 py-4 text-left font-semibold">Approved</th>
                 <th className="px-6 py-4 text-left font-semibold">Rejected</th>
                 <th className="px-6 py-4 text-left font-semibold">Commission</th>
-                <th className="px-6 py-4 text-left font-semibold">Actions</th>
+                <th className="px-15 py-4 text-left font-semibold">Actions</th>
               </tr>
             </thead>
 
@@ -131,7 +132,7 @@ const Vendor = () => {
             <tbody className="divide-y divide-gray-200">
               {filteredVendors.length === 0 ? (
                 <tr>
-                  <td colSpan="8" className="px-6 py-12 text-center">
+                  <td colSpan="9" className="px-6 py-12 text-center">
                     <div className="flex flex-col items-center justify-center">
                       <Search className="w-12 h-12 text-gray-300 mb-4" />
                       <h3 className="text-lg font-semibold text-gray-700 mb-2">No vendors found</h3>
@@ -140,12 +141,17 @@ const Vendor = () => {
                   </td>
                 </tr>
               ) : (
-                filteredVendors.map((vendor) => {
+                filteredVendors.map((vendor, index) => {
                   const rejectedLeads = vendor.totalLeads - vendor.approvedLeads;
                   const conversionRate = ((vendor.approvedLeads / vendor.totalLeads) * 100).toFixed(0);
 
                   return (
                     <tr key={vendor.id} className="hover:bg-gray-50 transition-colors">
+                      {/* Sr. No */}
+                      <td className="px-6 py-4">
+                        <span className="font-semibold text-gray-800">{index + 1}</span>
+                      </td>
+
                       {/* Vendor Name */}
                       <td className="px-6 py-4">
                         <p className="font-semibold text-gray-800">{vendor.vendorName}</p>
