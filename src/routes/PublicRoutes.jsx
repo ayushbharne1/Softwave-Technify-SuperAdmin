@@ -37,6 +37,9 @@ import ServiceDetails from "../pages/module/services/ServiceDetails";
 import AddService from "../pages/module/services/AddService";
 import VendorDetails from "../pages/module/vendor/VendorDetails";
 import UpdateSetting from "../pages/module/setting/UpdateSetting";
+import AgentEdit from "../pages/module/AgentManager/AgentEdit";
+import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
+import AddVendor from "../pages/module/vendor/AddVendor";
 const PublicRoutes = () => {
   return (
     <>
@@ -72,11 +75,13 @@ const PublicRoutes = () => {
           {/* Vendor */}
           <Route path="/vendor" element={<Vendor />} />
           <Route path="/vendors/view/:id"element={<VendorDetails/>} />
+          <Route path="/vendors/addvendor" element={<AddVendor/>} />
 
           {/* agent */}
           <Route path="/agent" element={<AgentManagements />} />
           <Route path="/agent/view/:id" element={<AgentView />} />
-
+          <Route path="/agent/edit/:id" element={<AgentEdit/>} />
+          <Route path="/agent/form" element={<AgentFormPage/>}/>
 
           {/* profile */}
           <Route path="/profile" element={<Profile />} />
