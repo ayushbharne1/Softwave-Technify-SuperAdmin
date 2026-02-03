@@ -1,4 +1,3 @@
-
 import { LayoutDashboard } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -56,13 +55,16 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
 
-            <input
+            <select
               className="w-full px-4 py-3 rounded-lg border border-gray-300
-              focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Gender"
+  bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
               value={form.gender}
               onChange={(e) => setForm({ ...form, gender: e.target.value })}
-            />
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
 
             <input
               type="date"
@@ -106,15 +108,36 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
               onChange={(e) => setForm({ ...form, address: e.target.value })}
             />
 
-            <input
+            <select
               className="w-full px-4 py-3 rounded-lg border border-gray-300
-              focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="enter only Student"
+  bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
               value={form.occupation}
-              onChange={(e) =>
-                setForm({ ...form, occupation: e.target.value })
-              }
-            />
+              onChange={(e) => setForm({ ...form, occupation: e.target.value })}
+            >
+              <option value="">Select Occupation</option>
+
+              <option value="Freelancer">Freelancer</option>
+              <option value="Sales Agent">Sales Agent</option>
+              <option value="DSA">DSA</option>
+              <option value="Credit/Insurance Agent">
+                Credit/Insurance Agent
+              </option>
+              <option value="Loan Agent">Loan Agent</option>
+              <option value="Stock Trader">Stock Trader</option>
+              <option value="Retail Shop">Retail Shop</option>
+              <option value="Salaried">Salaried</option>
+              <option value="Housewife">Housewife</option>
+              <option value="Retail/Telecom Outlet">
+                Retail/Telecom Outlet
+              </option>
+              <option value="Influencer">Influencer</option>
+              <option value="CSC/Suvidha Kendra">CSC/Suvidha Kendra</option>
+              <option value="Telecom Sales Agent">Telecom Sales Agent</option>
+              <option value="Retired Person">Retired Person</option>
+              <option value="Defence Personnel">Defence Personnel</option>
+              <option value="Student">Student</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
 
           <button
