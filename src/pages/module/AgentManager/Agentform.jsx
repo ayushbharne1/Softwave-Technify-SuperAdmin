@@ -13,11 +13,11 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
         <h1 className="text-xl font-semibold text-white">Add Agents</h1>
 
         <div className="text-sm text-white flex items-center gap-2 mt-3">
-          <NavLink to="/dashboard" className="hover:text-blue-600">
+          <NavLink to="/dashboard" className="">
             <LayoutDashboard size={16} />
           </NavLink>
           <span>&gt;</span>
-          <NavLink to="/agent" className="hover:text-blue-600">
+          <NavLink to="/agent" className="">
             Agents Management
           </NavLink>
           <span>&gt;</span>

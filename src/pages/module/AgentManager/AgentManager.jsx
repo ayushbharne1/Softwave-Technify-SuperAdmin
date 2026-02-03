@@ -69,7 +69,7 @@ export default function AgentManagements() {
         <div className="text-[15px] text-white flex items-center gap-2 mt-2">
           <NavLink
             to="/dashboard"
-            className="flex items-center gap-1 hover:text-blue-600 transition"
+            className="flex items-center gap-1"
           >
             <LayoutDashboard size={16} />
           </NavLink>
