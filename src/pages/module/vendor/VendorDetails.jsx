@@ -1,4 +1,3 @@
-
 import { LayoutDashboard, CheckCircle, XCircle } from "lucide-react";
 import React, { useState } from "react";
 import { useParams, NavLink } from "react-router-dom";
@@ -11,7 +10,8 @@ const VendorDetails = () => {
     {
       id: "1",
       vendorName: "Abhishek Sharma",
-      executive: 5,
+      vendorType: "Agency",
+      executive: 3,
       pending: 10,
       totalLeads: 180,
       approvedLeads: 120,
@@ -20,6 +20,7 @@ const VendorDetails = () => {
     {
       id: "2",
       vendorName: "Rahul Roy",
+      vendorType: "Executive",
       executive: 3,
       pending: 10,
       totalLeads: 180,
@@ -28,14 +29,11 @@ const VendorDetails = () => {
     },
   ];
 
-  // 🔹 Find vendor by id
   const vendor =
     vendorList.find((v) => v.id === id) || vendorList[0];
 
-  // 🔹 Status State
   const [status, setStatus] = useState("pending");
 
-  // 🔹 20% Commission Calculation
   const commissionAmount = Math.round(vendor.amount * 0.2);
 
   const getStatusBadge = () => {
@@ -60,6 +58,36 @@ const VendorDetails = () => {
     );
   };
 
+
+  const executiveNames = [
+  "Amit Verma",
+  "Neha Singh",
+  "Rohit Kumar",
+  "Pooja Sharma",
+  "Karan Patel",
+  "Anjali Mehta",
+];
+
+const projectdata = [
+  "website developement",
+  "CRM developement",
+  "App developement"
+]
+
+  // 🔹 Dummy Executive Projects (STATIC)
+  const executiveProjects = Array.from(
+  { length: vendor.executive },
+  (_, index) => ({
+    executiveName:
+      executiveNames[index % executiveNames.length],
+    project: projectdata[index % projectdata.length],
+    leads: 20 + index * 5,
+    approved: 10 + index * 3,
+    status: index % 2 === 0 ? "Active" : "Completed",
+  })
+);
+
+
   return (
     <div className="mt-6 bg-gray-100 min-h-screen">
       {/* Header */}
@@ -73,9 +101,7 @@ const VendorDetails = () => {
             <LayoutDashboard size={16} />
           </NavLink>
           <span>&gt;</span>
-           <NavLink to="/vendor" className="flex items-center gap-1">
-          <span>Vendor Management</span>
-          </NavLink>
+          <NavLink to="/vendor">Vendor Management</NavLink>
           <span>&gt;</span>
           <span>Vendor Details</span>
         </div>
@@ -97,7 +123,6 @@ const VendorDetails = () => {
             <p className="text-gray-500">Vendor Name</p>
             <p className="font-semibold">{vendor.vendorName}</p>
           </div>
-
 
           <div className="bg-orange-50 p-4 rounded-lg">
             <p className="text-gray-500">Executive</p>
@@ -121,39 +146,126 @@ const VendorDetails = () => {
             </p>
           </div>
 
-           <div className="bg-orange-50 p-4 rounded-lg">
+          <div className="bg-orange-50 p-4 rounded-lg">
             <p className="text-gray-500">Amount</p>
             <p className="font-semibold text-green-600">
-              {vendor.amount}
+              ₹{vendor.amount}
             </p>
           </div>
 
           <div className="bg-orange-50 p-4 rounded-lg md:col-span-2">
-            <p className="text-gray-500">Total amount after 20% commision</p>
+            <p className="text-gray-500">Total Commission</p>
             <p className="font-semibold text-lg text-blue-600">
               ₹{commissionAmount.toLocaleString()}
             </p>
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="mt-6 flex justify-between items-center">
-          <div className="flex gap-3">
-            <button
-              onClick={() => setStatus("approved")}
-              className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-            >
-              <CheckCircle size={16} /> Approve
-            </button>
+        {/* NEW SECTION — Executive Project Table */}
+       <div className="mt-10 p-2 rounded-xl ">
+  <h3 className="text-xl font-semibold mb-5">
+    Executive Project Details
+  </h3>
 
-            <button
-              onClick={() => setStatus("rejected")}
-              className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+  <div className="overflow-x-auto">
+    <table className="min-w-full divide-y divide-gray-200">
+      {/* TABLE HEAD */}
+      <thead className="bg-[#1d476e33] sticky top-0 z-10">
+        <tr className="text-black uppercase text-xs tracking-wider">
+          {[
+            "Executive",
+            "Project",
+            "Leads",
+            "Approved",
+            "Status",
+          ].map((col) => (
+            <th
+              key={col}
+              className="p-4 text-center text-sm font-medium"
             >
-              <XCircle size={16} /> Reject
-            </button>
-          </div>
+              {col}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      {/* TABLE BODY */}
+      <tbody className="bg-white border-b border-gray-200 divide-y divide-gray-200">
+        {executiveProjects.length === 0 && (
+          <tr>
+            <td
+              colSpan="5"
+              className="text-center py-6 text-gray-400"
+            >
+              No executive project data found
+            </td>
+          </tr>
+        )}
+
+        {executiveProjects.map((item, index) => (
+          <tr
+            key={index}
+            className="hover:bg-gray-50 transition"
+          >
+            {/* Executive */}
+            <td className="px-6 py-4 font-medium text-center">
+              {item.executiveName}
+            </td>
+
+            {/* Project */}
+            <td className="px-6 py-4 font-medium text-center">
+              {item.project}
+            </td>
+
+            {/* Leads */}
+            <td className="px-6 py-4 font-medium text-center">
+              {item.leads}
+            </td>
+
+            {/* Approved */}
+            <td className="px-6 py-4 text-center">
+              <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
+                {item.approved}
+              </span>
+            </td>
+
+            {/* Status */}
+            <td className="px-6 py-4 text-center">
+              <span
+                className={`px-2 py-1 rounded text-xs font-medium ${
+                  item.status === "Active"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-blue-100 text-blue-700"
+                }`}
+              >
+                {item.status}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+        {/* Action Buttons */}
+        <div className="mt-6 flex gap-3">
+          <button
+            onClick={() => setStatus("approved")}
+            className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+          >
+            <CheckCircle size={16} /> Approve
+          </button>
+
+          <button
+            onClick={() => setStatus("rejected")}
+            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+          >
+            <XCircle size={16} /> Reject
+          </button>
         </div>
+
       </div>
     </div>
   );
