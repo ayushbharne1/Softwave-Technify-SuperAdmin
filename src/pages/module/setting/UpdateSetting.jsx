@@ -64,22 +64,41 @@ const UpdateSetting = ({ initialData, onCancel, onSave }) => {
   };
 
   return (
-<>
-      <div className="bg-gradient-to-r mt-6 from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6">
-              <h1 className="text-2xl font-semibold text-white">Setting Management</h1>
-      
-              <div className="text-sm text-white flex items-center gap-2 mt-2">
-                <NavLink to="/dashboard" className="flex items-center gap-1">
-                  <LayoutDashboard size={16} />
-                </NavLink>
-                <span>&gt;</span>
-                 <NavLink to="/setting" className="flex items-center gap-1">
-                  <span>Setting</span>
-                </NavLink>
-                <span>&gt;</span>
-                <span>Update Setting</span>
-              </div>
+<div className="px-6 mt-6">
+      <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+              <LayoutDashboard className="w-7 h-7" />
+              Setting Management
+            </h1>
+            <div className="text-sm text-orange-100 flex items-center gap-2 mt-3">
+              <NavLink
+                to="/dashboard"
+                className="flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span className="bg-white/20 px-3 py-1 rounded-lg">
+                  Dashboard
+                </span>
+              </NavLink>
+              <span className="text-white/60">›</span>
+
+               <NavLink
+                to="/setting"
+                className="flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span className="bg-white/20 px-3 py-1 rounded-lg">
+                  Setting
+                </span>
+              </NavLink>
+              <span className="text-white/60">›</span>
+             
+              <span className="text-white font-medium">Update Setting</span>
             </div>
+          </div>
+          
+        </div>
+      </div>
     <form
       onSubmit={handleSubmit}
       className="bg-white rounded-2xl shadow-md p-6 space-y-4"
@@ -165,7 +184,7 @@ const UpdateSetting = ({ initialData, onCancel, onSave }) => {
         </button>
       </div>
     </form>
-    </>
+    </div>
   );
 };
 
