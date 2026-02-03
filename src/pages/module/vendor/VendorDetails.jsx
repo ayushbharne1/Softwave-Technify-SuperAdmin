@@ -11,7 +11,6 @@ const VendorDetails = () => {
     {
       id: "1",
       vendorName: "Abhishek Sharma",
-      vendorType: "Affiliate",
       executive: 5,
       pending: 10,
       totalLeads: 180,
@@ -21,7 +20,6 @@ const VendorDetails = () => {
     {
       id: "2",
       vendorName: "Rahul Roy",
-      vendorType: "Channel Partner",
       executive: 3,
       pending: 10,
       totalLeads: 180,
@@ -71,11 +69,13 @@ const VendorDetails = () => {
         </h1>
 
         <div className="text-[15px] text-white flex items-center gap-2 mt-2">
-          <NavLink to="/vendors" className="flex items-center gap-1">
+          <NavLink to="/dashboard" className="flex items-center gap-1">
             <LayoutDashboard size={16} />
           </NavLink>
           <span>&gt;</span>
+           <NavLink to="/vendor" className="flex items-center gap-1">
           <span>Vendor Management</span>
+          </NavLink>
           <span>&gt;</span>
           <span>Vendor Details</span>
         </div>
@@ -98,10 +98,6 @@ const VendorDetails = () => {
             <p className="font-semibold">{vendor.vendorName}</p>
           </div>
 
-          <div className="bg-orange-50 p-4 rounded-lg">
-            <p className="text-gray-500">Vendor Type</p>
-            <p className="font-semibold">{vendor.vendorType}</p>
-          </div>
 
           <div className="bg-orange-50 p-4 rounded-lg">
             <p className="text-gray-500">Executive</p>
@@ -125,8 +121,15 @@ const VendorDetails = () => {
             </p>
           </div>
 
+           <div className="bg-orange-50 p-4 rounded-lg">
+            <p className="text-gray-500">Amount</p>
+            <p className="font-semibold text-green-600">
+              {vendor.amount}
+            </p>
+          </div>
+
           <div className="bg-orange-50 p-4 rounded-lg md:col-span-2">
-            <p className="text-gray-500">Total amount</p>
+            <p className="text-gray-500">Total amount after 20% commision</p>
             <p className="font-semibold text-lg text-blue-600">
               ₹{commissionAmount.toLocaleString()}
             </p>
