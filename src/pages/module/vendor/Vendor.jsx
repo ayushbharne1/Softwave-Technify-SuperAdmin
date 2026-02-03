@@ -1,4 +1,4 @@
-import { LayoutDashboard } from "lucide-react";
+import { Edit, LayoutDashboard } from "lucide-react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Eye, Pencil, Trash2 } from "lucide-react";
@@ -9,7 +9,7 @@ const Vendor = () => {
     {
       id: 1,
       vendorName: "Abhishekh sharma",
-      executive: 5,
+      executive: 3,
       pending: 10,
       totalLeads: 180,
       approvedLeads: 120,
@@ -52,7 +52,7 @@ const Vendor = () => {
           <div className="flex justify-between items-center mb-6">
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900"
-          onClick={() => navigate("/vendors/addvendor")}
+          onClick={() => navigate("/vendor/addvendor")}
         >
           Add Vendor
         </button>
@@ -144,7 +144,12 @@ const Vendor = () => {
                         <Eye
                           size={18}
                           className="text-blue-600 cursor-pointer"
-                          onClick={() => navigate(`/vendors/view/${v.id}`)}
+                          onClick={() => navigate(`/vendor/view/${v.id}`)}
+                        />
+                         <Edit
+                          size={18}
+                          className="text-blue-600 cursor-pointer"
+                          onClick={() => navigate(`/vendor/edit/${v.id}`)}
                         />
                         <Trash2
                           size={18}

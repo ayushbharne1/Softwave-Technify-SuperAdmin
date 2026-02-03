@@ -40,6 +40,7 @@ import UpdateSetting from "../pages/module/setting/UpdateSetting";
 import AgentEdit from "../pages/module/AgentManager/AgentEdit";
 import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
 import AddVendor from "../pages/module/vendor/AddVendor";
+import EditVendor from "../pages/module/vendor/EditVendor";
 const PublicRoutes = () => {
   return (
     <>
@@ -74,8 +75,9 @@ const PublicRoutes = () => {
           <Route path="/notifications" element={<Notifications />} />
           {/* Vendor */}
           <Route path="/vendor" element={<Vendor />} />
-          <Route path="/vendors/view/:id"element={<VendorDetails/>} />
-          <Route path="/vendors/addvendor" element={<AddVendor/>} />
+          <Route path="/vendor/view/:id"element={<VendorDetails/>} />
+          <Route path="/vendor/addvendor" element={<AddVendor/>} />
+          <Route path="/vendor/edit/:id" element={<EditVendor/>} />
 
           {/* agent */}
           <Route path="/agent" element={<AgentManagements />} />
