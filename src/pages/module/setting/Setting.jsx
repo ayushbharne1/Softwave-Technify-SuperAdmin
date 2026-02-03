@@ -43,19 +43,32 @@ export const Setting = () => {
   };
 
   return (
-    <div className="min-h-screen mt-6">
+    <div className="min-h-screen mt-6 px-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6">
-              <h1 className="text-2xl font-semibold text-white">Setting Management</h1>
-      
-              <div className="text-sm text-white flex items-center gap-2 mt-2">
-                <NavLink to="/dashboard" className="flex items-center gap-1">
-                  <LayoutDashboard size={16} />
-                </NavLink>
-                <span>&gt;</span>
-                <span>Setting</span>
-              </div>
+      <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+              <LayoutDashboard className="w-7 h-7" />
+              Setting Management
+            </h1>
+            <div className="text-sm text-orange-100 flex items-center gap-2 mt-3">
+              <NavLink
+                to="/dashboard"
+                className="flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span className="bg-white/20 px-3 py-1 rounded-lg">
+                  Dashboard
+                </span>
+              </NavLink>
+              <span className="text-white/60">›</span>
+             
+              <span className="text-white font-medium">Setting</span>
             </div>
+          </div>
+          
+        </div>
+      </div>
 
       {/* Profile Card */}
       <div className="bg-white rounded-xl shadow-md p-6 mx-auto text-center">
