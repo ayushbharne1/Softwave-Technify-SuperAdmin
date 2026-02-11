@@ -9,6 +9,12 @@ import agentDeleteReducer from "../slice/agent/agentDeleteSlice"
 import agentReducer from "../slice/agent/agentAddSlice"
 import agentGetReducer from "../slice/agent/agentGetSlice"
 import agentViewReducer from "../slice/agent/agentViewSlice"
+import addFaq from "../slice/faq/AddfaSlice";
+import faqReducer from "../slice/faq/GetFaqSlice";
+import editfaqReducer from "../slice/faq/EditfaqSlice"
+// import deletefaqReducer from "../slice/faq/DeletefaqSlice"
+import getAllServiceReducer from "../slice/services/getAllServiceSlice"
+import serviceDetailsReducer from "../slice/services/getDetails"
 export const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -17,6 +23,12 @@ export const store = configureStore({
     agentKyc: kycReducer,
     commission: commissionReducer,
     
+     addfaq: addFaq,
+    getfaq: faqReducer,
+    // delfaq: deletefaqReducer,
+
+    editfaq: editfaqReducer,
+
     agent: agentReducer,
 
     agentEdit: agentEditReducer,
@@ -25,6 +37,8 @@ export const store = configureStore({
     agentDelete: agentDeleteReducer,
     agentStatus: agentStatusReducer,
 
+    services: getAllServiceReducer,
+    serviceDetails: serviceDetailsReducer,
   },
 });
 

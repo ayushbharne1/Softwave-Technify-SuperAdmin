@@ -39,27 +39,36 @@ export default function CommissionManagement() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="p-6 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#F7941D] to-[#0072BC] rounded-2xl p-6 shadow-lg mb-6 mt-6">
-        <h1 className="text-2xl font-semibold text-white">
-          Commission Management
-        </h1>
-
-        <div className="text-[15px] flex items-center gap-2 text-blue-100 mt-2">
-          <NavLink
-            to="/dashboard"
-            className="flex items-center gap-1 hover:text-white transition"
-          >
-            <LayoutDashboard size={16} />
-          </NavLink>
-          <span>&gt;</span>
-          <span className="text-white">Commission Management</span>
-        </div>
-      </div>
+      <div className="bg-linear-to-r from-orange-500  to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
+             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+               <div>
+                 <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+                   <LayoutDashboard className="w-7 h-7" />
+                   Commission Management
+                 </h1>
+                 <div className="text-sm text-orange-100 flex items-center gap-2 mt-3">
+                   <NavLink
+                     to="/dashboard"
+                     className="flex items-center gap-1 hover:text-white transition-colors"
+                   >
+                     <span className="bg-white/20 px-3 py-1 rounded-lg">
+                       Dashboard
+                     </span>
+                   </NavLink>
+                   <span className="text-white/60">›</span>
+                   <span className="text-white font-medium">Commission Management</span>
+                 </div>
+               </div>
+               <div className="bg-white/20 px-4 py-2 rounded-lg">
+                 <p className="text-white text-sm">{agents.length} Total Agents</p>
+               </div>
+             </div>
+           </div>
 
       {/* Table */}
-      <div className="shadow bg-white p-6 overflow-x-auto">
+      {/* <div className="shadow bg-white p-6 overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-[#1d476e33] sticky top-0 z-10">
             <tr className="text-black uppercase text-sm tracking-wider">
@@ -170,7 +179,153 @@ export default function CommissionManagement() {
             })}
           </tbody>
         </table>
+      </div> */}
+
+<div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+  {/* Table Header */}
+  <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+    <h2 className="text-xl font-bold text-gray-800">Agent Commission Analytics</h2>
+  </div>
+
+  <div className="overflow-x-auto">
+    <table className="w-full">
+      {/* Table Head */}
+      <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
+        <tr className="text-sm text-gray-700">
+          <th className="px-6 py-4 text-center font-semibold">Sr. No</th>
+          <th className="px-6 py-4 text-center font-semibold">Agent Name</th>
+          <th className="px-6 py-4 text-center font-semibold">Approved Leads</th>
+          <th className="px-6 py-4 text-center font-semibold">Commission/Lead</th>
+          <th className="px-6 py-4 text-center font-semibold">Total Commission</th>
+          <th className="px-6 py-4 text-center font-semibold">Adjustment</th>
+          <th className="px-6 py-4 text-center font-semibold">Final Amount</th>
+          <th className="px-6 py-4 text-center font-semibold">Status</th>
+          <th className="px-6 py-4 text-center font-semibold">Action</th>
+        </tr>
+      </thead>
+
+      {/* Table Body */}
+      <tbody className="divide-y divide-gray-200">
+        {agents?.length === 0 ? (
+          <tr>
+            <td colSpan="9" className="px-6 py-12 text-center">
+              <div className="flex flex-col items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+                  <div className="w-6 h-6 text-gray-400">!</div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">No commission data found</h3>
+                <p className="text-gray-500">No agent commission records available</p>
+              </div>
+            </td>
+          </tr>
+        ) : (
+          agents?.map((agent, index) => {
+            const total = agent.totalCommission;
+            const finalAmount = total + agent.adjustment;
+
+            return (
+              <tr
+                key={agent.id}
+                className={`hover:bg-gray-50 transition-colors ${agent.locked ? "opacity-70" : ""}`}
+              >
+                {/* Sr. No */}
+                <td className="px-6 py-4 text-center">
+                  <span className="font-semibold text-gray-800">{index + 1}</span>
+                </td>
+
+                {/* Agent Name */}
+                <td className="px-6 py-4 text-center">
+                  <p className="font-semibold text-gray-800">{agent.name}</p>
+                </td>
+
+                {/* Approved Leads */}
+                <td className="px-6 py-4 text-center">
+                  <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+                    {agent.approvedLeads}
+                  </span>
+                </td>
+
+                {/* Commission Per Lead */}
+                <td className="px-6 py-4 text-center">
+                  <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
+                    ₹{agent.commissionPerLead}
+                  </span>
+                </td>
+
+                {/* Total Commission */}
+                <td className="px-6 py-4 text-center">
+                  <span className="font-semibold text-gray-800">{total.toLocaleString()}</span>
+                </td>
+
+                {/* Adjustment */}
+                <td className="px-6 py-4 text-center">
+                  <input
+                    type="number"
+                    disabled={agent.locked}
+                    value={agent.adjustment}
+                    onChange={(e) =>
+                      handleAdjustment(agent.id, e.target.value)
+                    }
+                    className="w-24 px-3 py-2 rounded-xl text-center bg-white border border-gray-300 focus:ring-2 focus:ring-orange-400 outline-none disabled:bg-gray-100 disabled:text-gray-500 rounded-lg shadow-sm"
+                  />
+                </td>
+
+                {/* Final Amount */}
+                <td className="px-6 py-4 text-center">
+                  <div className="bg-gradient-to-r from-emerald-50 to-emerald-100 p-2 rounded-lg inline-block">
+                    <p className="font-bold text-emerald-700">₹{finalAmount.toLocaleString()}</p>
+                  </div>
+                </td>
+
+                {/* Status */}
+                <td className="px-6 py-4 text-center">
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      agent.locked
+                        ? "bg-red-100 text-red-800"
+                        : "bg-orange-100 text-orange-800"
+                    }`}
+                  >
+                    {agent.locked ? "Locked" : "Editable"}
+                  </span>
+                </td>
+
+                {/* Action */}
+                <td className="px-6 py-4 text-center">
+                  {!agent.locked && (
+                    <button
+                      onClick={() => lockCommission(agent.id)}
+                      className="flex items-center gap-1 px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-300 whitespace-nowrap"
+                    >
+                      Approve & Lock
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  {/* Table Footer */}
+  <div className="px-6 py-4 border-t border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+    <div className="flex items-center justify-between text-sm text-gray-600">
+      <span>Showing {agents?.length || 0} commission records</span>
+      <div className="flex items-center gap-4">
+        <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+          Previous
+        </button>
+        <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg">1</span>
+        <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+          Next
+        </button>
       </div>
+    </div>
+  </div>
+</div>
+
     </div>
   );
 }

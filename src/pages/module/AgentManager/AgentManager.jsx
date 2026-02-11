@@ -59,15 +59,15 @@ export default function AgentManagements() {
   };
 
   // Filter agents based on search term
-  const filteredAgents = agents.filter(agent =>
-    agent.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredAgents = agents.filter((agent) =>
+    agent.name?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // Pagination calculations (based on filtered agents)
   const totalPages = Math.ceil(filteredAgents.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  
+
   // Get current page agents - FIXED
   const currentAgents = filteredAgents.slice(indexOfFirstItem, indexOfLastItem);
 
@@ -102,8 +102,21 @@ export default function AgentManagements() {
     console.log("Current page:", currentPage);
     console.log("Total pages:", totalPages);
     console.log("Current agents:", currentAgents.length);
-    console.log("Showing:", indexOfFirstItem + 1, "to", Math.min(indexOfLastItem, filteredAgents.length));
-  }, [agents, filteredAgents, currentPage, totalPages, currentAgents, indexOfFirstItem, indexOfLastItem]);
+    console.log(
+      "Showing:",
+      indexOfFirstItem + 1,
+      "to",
+      Math.min(indexOfLastItem, filteredAgents.length),
+    );
+  }, [
+    agents,
+    filteredAgents,
+    currentPage,
+    totalPages,
+    currentAgents,
+    indexOfFirstItem,
+    indexOfLastItem,
+  ]);
 
   if (loading && agents.length === 0) {
     return <LoaderSpinner />;
@@ -117,10 +130,18 @@ export default function AgentManagements() {
       <div className="bg-linear-to-r from-orange-500 to-orange-600 rounded-2xl p-6 shadow-xl mb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Agent Management</h1>
+            <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+              <LayoutDashboard className="w-7 h-7" />
+              Agent Management
+            </h1>
             <div className="text-sm text-orange-100 flex items-center gap-2 mt-3">
-              <NavLink to="/dashboard" className="flex items-center gap-1 hover:text-white transition-colors">
-                <LayoutDashboard size={16} />
+              <NavLink
+                to="/dashboard"
+                className="flex items-center gap-1 hover:text-white transition-colors"
+              >
+                <span className="bg-white/20 px-3 py-1 rounded-lg">
+                  Dashboard
+                </span>
               </NavLink>
               <span className="text-white/60">›</span>
               <span className="text-white font-medium">Agent Management</span>
@@ -168,26 +189,34 @@ export default function AgentManagements() {
             {/* Table Head */}
             <thead className="bg-linear-to-r from-gray-50 to-gray-100">
               <tr className="text-sm text-gray-700">
-                <th className="px-6 py-4 text-left font-semibold">Sr. No</th>
-                <th className="px-6 py-4 text-left font-semibold">Name</th>
-                <th className="px-6 py-4 text-left font-semibold">Phone</th>
-                <th className="px-6 py-4 text-left font-semibold">Referral ID</th>
-                <th className="px-6 py-4 text-left font-semibold">Status</th>
-                <th className="px-6 py-4 text-left font-semibold">KYC Status</th>
-                <th className="px-6 py-4 text-left font-semibold">Actions</th>
+                <th className="px-6 py-4 text-center font-semibold">Sr. No</th>
+                <th className="px-6 py-4 text-center font-semibold">Name</th>
+                <th className="px-6 py-4 text-center font-semibold">Phone</th>
+                <th className="px-6 py-4 text-center font-semibold">
+                  Referral ID
+                </th>
+                <th className="px-6 py-4 text-center font-semibold">Status</th>
+                <th className="px-6 py-4 text-center font-semibold">
+                  KYC Status
+                </th>
+                <th className="px-6 py-4 text-center font-semibold">Actions</th>
               </tr>
             </thead>
 
             {/* Table Body */}
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-200 text-center">
               {currentAgents.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="px-6 py-12 text-center">
                     <div className="flex flex-col items-center justify-center">
                       <Search className="w-12 h-12 text-gray-300 mb-4" />
-                      <h3 className="text-lg font-semibold text-gray-700 mb-2">No agents found</h3>
+                      <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                        No agents found
+                      </h3>
                       <p className="text-gray-500">
-                        {searchTerm ? "Try adjusting your search criteria" : "No agents available at the moment"}
+                        {searchTerm
+                          ? "Try adjusting your search criteria"
+                          : "No agents available at the moment"}
                       </p>
                     </div>
                   </td>
@@ -197,20 +226,29 @@ export default function AgentManagements() {
                   const srNo = indexOfFirstItem + index + 1;
 
                   return (
-                    <tr key={agent._id} className="hover:bg-gray-50 transition-colors">
+                    <tr
+                      key={agent._id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
                       {/* Sr. No */}
                       <td className="px-6 py-4">
-                        <span className="font-semibold text-gray-800">{srNo}</span>
+                        <span className="font-semibold text-gray-800">
+                          {srNo}
+                        </span>
                       </td>
 
                       {/* Name */}
                       <td className="px-6 py-4">
-                        <p className="font-semibold text-gray-800">{agent.name || "—"}</p>
+                        <p className="font-semibold text-gray-800">
+                          {agent.name || "—"}
+                        </p>
                       </td>
 
                       {/* Phone */}
                       <td className="px-6 py-4">
-                        <span className="text-gray-700">{agent.phone || "—"}</span>
+                        <span className="text-gray-700">
+                          {agent.phone || "—"}
+                        </span>
                       </td>
 
                       {/* Referral ID */}
@@ -242,7 +280,7 @@ export default function AgentManagements() {
                       </td>
 
                       {/* Actions */}
-                      <td className="px-6 py-4">
+                      <td className="px-9 py-4">
                         <div className="flex items-center gap-3">
                           <button
                             onClick={() => navigate(`/agent/view/${agent._id}`)}
@@ -280,7 +318,8 @@ export default function AgentManagements() {
           <div className="flex items-center justify-between text-sm text-gray-600">
             <span>
               Showing {currentAgents.length > 0 ? indexOfFirstItem + 1 : 0} to{" "}
-              {Math.min(indexOfLastItem, filteredAgents.length)} of {filteredAgents.length} agents
+              {Math.min(indexOfLastItem, filteredAgents.length)} of{" "}
+              {filteredAgents.length} agents
             </span>
             <div className="flex items-center gap-4">
               <button
@@ -294,7 +333,7 @@ export default function AgentManagements() {
               >
                 Previous
               </button>
-              
+
               {/* Page Numbers */}
               <div className="flex items-center gap-2">
                 {totalPages > 0 && (
@@ -309,10 +348,12 @@ export default function AgentManagements() {
                   </>
                 )}
               </div>
-              
+
               <button
                 onClick={handleNextPage}
-                disabled={currentPage === totalPages || filteredAgents.length === 0}
+                disabled={
+                  currentPage === totalPages || filteredAgents.length === 0
+                }
                 className={`px-4 py-2 border border-gray-300 rounded-lg transition-colors ${
                   currentPage === totalPages || filteredAgents.length === 0
                     ? "opacity-50 cursor-not-allowed"

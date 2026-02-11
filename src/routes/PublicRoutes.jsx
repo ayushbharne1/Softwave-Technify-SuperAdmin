@@ -42,6 +42,7 @@ import AgentFormPage from "../pages/module/AgentManager/Agentformpage";
 import AddVendor from "../pages/module/vendor/AddVendor";
 import AddCategory from "../pages/module/services/AddCategory";
 import EditVendor from "../pages/module/vendor/EditVendor";
+import EditService from "../pages/module/services/EditService";
 const PublicRoutes = () => {
   return (
     <>
@@ -53,6 +54,7 @@ const PublicRoutes = () => {
           <Route path="/services/addservice" element={<AddService/>} />
           <Route path="/services/addcategory" element={<AddCategory/>} />
            <Route path="/services/:id" element={<ServiceDetails />} />
+           <Route path="/services/edit/:id" element={<EditService/>} />
 
            
 

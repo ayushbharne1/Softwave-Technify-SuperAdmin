@@ -1,6 +1,9 @@
 import { LayoutDashboard, PlusCircle, Eye, Filter, Search } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { fetchAllServices } from "../../../redux/slice/service/getAllServiceSlice";
+import { fetchAllServices } from "../../../redux/slice/services/getAllServiceSlice";
 
 import website from "../../../assets/services/website.webp"
 import app from "../../../assets/services/app.png";
@@ -16,106 +19,123 @@ const Services = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+const dispatch = useDispatch();
 
-  const services = [
-    {
-      id: "website-development",
-      title: "Website Development",
-      shortDesc: "Modern, responsive, and secure websites.",
-      status: "active",
-      projects: 24,
-      border: "border-gray-300",
-      image: website,
-      priceRange: "₹50K - ₹5L"
-    },
-    {
-      id: "mobile-app-development",
-      title: "Mobile App Development",
-      shortDesc: "Custom Android & iOS applications.",
-      status: "active",
-      projects: 18,
-      border: "border-gray-300",
-      image: app,
-      priceRange: "₹1L - ₹15L"
-    },
-    {
-      id: "ecommerce-development",
-      title: "E-commerce Development",
-      shortDesc: "Secure and scalable online stores.",
-      status: "active",
-      projects: 32,
-      border: "border-gray-300",
-      image: ecommerce,
-      priceRange: "₹2L - ₹25L"
-    },
-    {
-      id: "erp-development",
-      title: "ERP Development",
-      shortDesc: "Business automation solutions.",
-      status: "active",
-      projects: 12,
-      border: "border-gray-300",
-      image: erp,
-      priceRange: "₹5L - ₹50L"
-    },
-    {
-      id: "cms-development",
-      title: "CMS Development",
-      shortDesc: "Easy content management systems.",
-      status: "active",
-      projects: 28,
-      border: "border-gray-300",
-      image: cms,
-      priceRange: "₹30K - ₹3L"
-    },
-    {
-      id: "crm-development",
-      title: "CRM Development",
-      shortDesc: "Customer and lead management tools.",
-      status: "inactive",
-      projects: 15,
-      border: "border-gray-300",
-      image: crm,
-      priceRange: "₹2L - ₹20L"
-    },
-    {
-      id: "custom-software-development",
-      title: "Custom Software Development",
-      shortDesc: "Tailor-made software solutions for businesses.",
-      status: "active",
-      projects: 21,
-      border: "border-gray-300",
-      image: customSoftware,
-      priceRange: "₹3L - ₹30L"
-    },
-    {
-      id: "product-development",
-      title: "Product Development",
-      shortDesc: "From idea to scalable digital products.",
-      status: "active",
-      projects: 9,
-      border: "border-gray-300",
-      image: productDevelopment,
-      priceRange: "₹10L - ₹1Cr"
-    },
-    {
-      id: "digital-transformation",
-      title: "Digital Transformation",
-      shortDesc: "Modernize business processes with technology.",
-      status: "planning",
-      projects: 5,
-      border: "border-gray-300",
-      image: digitalTransformation,
-      priceRange: "₹15L - ₹1.5Cr"
-    },
-  ];
+const { services, loading, error } = useSelector(
+  (state) => state.services
+);
 
-  const filteredServices = services.filter(service => {
-    const matchesSearch = service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         service.shortDesc.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filterStatus === "all" || service.status === filterStatus;
-    return matchesSearch && matchesFilter;
-  });
+useEffect(() => {
+  dispatch(fetchAllServices());
+}, [dispatch]);
+
+  // const services = [
+  //   {
+  //     id: "website-development",
+  //     title: "Website Development",
+  //     shortDesc: "Modern, responsive, and secure websites.",
+  //     status: "active",
+  //     projects: 24,
+  //     border: "border-gray-300",
+  //     image: website,
+  //     priceRange: "₹50K - ₹5L"
+  //   },
+  //   {
+  //     id: "mobile-app-development",
+  //     title: "Mobile App Development",
+  //     shortDesc: "Custom Android & iOS applications.",
+  //     status: "active",
+  //     projects: 18,
+  //     border: "border-gray-300",
+  //     image: app,
+  //     priceRange: "₹1L - ₹15L"
+  //   },
+  //   {
+  //     id: "ecommerce-development",
+  //     title: "E-commerce Development",
+  //     shortDesc: "Secure and scalable online stores.",
+  //     status: "active",
+  //     projects: 32,
+  //     border: "border-gray-300",
+  //     image: ecommerce,
+  //     priceRange: "₹2L - ₹25L"
+  //   },
+  //   {
+  //     id: "erp-development",
+  //     title: "ERP Development",
+  //     shortDesc: "Business automation solutions.",
+  //     status: "active",
+  //     projects: 12,
+  //     border: "border-gray-300",
+  //     image: erp,
+  //     priceRange: "₹5L - ₹50L"
+  //   },
+  //   {
+  //     id: "cms-development",
+  //     title: "CMS Development",
+  //     shortDesc: "Easy content management systems.",
+  //     status: "active",
+  //     projects: 28,
+  //     border: "border-gray-300",
+  //     image: cms,
+  //     priceRange: "₹30K - ₹3L"
+  //   },
+  //   {
+  //     id: "crm-development",
+  //     title: "CRM Development",
+  //     shortDesc: "Customer and lead management tools.",
+  //     status: "inactive",
+  //     projects: 15,
+  //     border: "border-gray-300",
+  //     image: crm,
+  //     priceRange: "₹2L - ₹20L"
+  //   },
+  //   {
+  //     id: "custom-software-development",
+  //     title: "Custom Software Development",
+  //     shortDesc: "Tailor-made software solutions for businesses.",
+  //     status: "active",
+  //     projects: 21,
+  //     border: "border-gray-300",
+  //     image: customSoftware,
+  //     priceRange: "₹3L - ₹30L"
+  //   },
+  //   {
+  //     id: "product-development",
+  //     title: "Product Development",
+  //     shortDesc: "From idea to scalable digital products.",
+  //     status: "active",
+  //     projects: 9,
+  //     border: "border-gray-300",
+  //     image: productDevelopment,
+  //     priceRange: "₹10L - ₹1Cr"
+  //   },
+  //   {
+  //     id: "digital-transformation",
+  //     title: "Digital Transformation",
+  //     shortDesc: "Modernize business processes with technology.",
+  //     status: "planning",
+  //     projects: 5,
+  //     border: "border-gray-300",
+  //     image: digitalTransformation,
+  //     priceRange: "₹15L - ₹1.5Cr"
+  //   },
+  // ];
+
+ const filteredServices = services.filter((service) => {
+  const title = service.projectName || "";
+  const desc = service.description || "";
+
+  const matchesSearch =
+    title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    desc.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const matchesFilter =
+    filterStatus === "all" || service.status === filterStatus;
+
+  return matchesSearch && matchesFilter;
+});
+
 
   return (
     <div className="p-6">
@@ -251,58 +271,64 @@ const Services = () => {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredServices.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => navigate(`/services/${item.id}`)}
-              className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-orange-300"
-            >
-              {/* Image Container */}
-              <div className="relative overflow-hidden rounded-xl bg-linear-to-br from-gray-50 to-white mb-6 h-48">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 right-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    item.status === 'active' ? 'bg-green-100 text-green-800' :
-                    item.status === 'inactive' ? 'bg-red-100 text-red-800' :
-                    'bg-blue-100 text-blue-800'
-                  }`}>
-                    {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
-                  </span>
-                </div>
-              </div>
+         {filteredServices.map((item) => (
+  <div
+    key={item._id}
+    onClick={() => navigate(`/services/${item._id}`)}
+    className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-orange-300"
+  >
+    {/* Image */}
+    <div className="relative overflow-hidden rounded-xl bg-linear-to-br from-gray-50 to-white mb-6 h-48">
+      <img
+        src={item.thumbnail || item.projectType?.thumbnail}
+        alt={item.projectName}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      <div className="absolute top-3 right-3">
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+            item.status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-red-100 text-red-800"
+          }`}
+        >
+          {item.status}
+        </span>
+      </div>
+    </div>
 
-              {/* Content */}
-              <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors">
-                {item.title}
-              </h3>
+    {/* Content */}
+    <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600">
+      {item.projectName}
+    </h3>
 
-              <p className="text-gray-600 text-sm mb-4">
-                {item.shortDesc}
-              </p>
+    <p className="text-gray-600 text-sm mb-4">
+      {item.description}
+    </p>
 
-              {/* Stats */}
-              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                <div className="text-left">
-                  <p className="text-xs text-gray-500">Projects</p>
-                  <p className="font-semibold text-gray-800">{item.projects}</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-xs text-gray-500">Price Range</p>
-                  <p className="font-semibold text-gray-800">{item.priceRange}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-gray-500">View</p>
-                  <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-50 group-hover:bg-orange-100 transition-colors">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    {/* Stats */}
+    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+      <div>
+        <p className="text-xs text-gray-500">Type</p>
+        <p className="font-semibold text-gray-800">
+          {item.projectType?.name}
+        </p>
+      </div>
+
+      <div>
+        <p className="text-xs text-gray-500">Price</p>
+        <p className="font-semibold text-gray-800">
+          ₹{item.price}
+        </p>
+      </div>
+
+      <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-50">
+        <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+))}
+
         </div>
 
         {filteredServices.length === 0 && (
@@ -316,21 +342,7 @@ const Services = () => {
         )}
       </div>
 
-      {/* Quick Actions Footer */}
-      {/* <div className="mt-8 p-6 bg-gradient-to-r from-orange-50 to-white rounded-2xl border border-orange-200">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800">Need help managing projects?</h3>
-            <p className="text-gray-600 text-sm">Explore our project management tools and resources</p>
-          </div>
-          <button
-            onClick={() => navigate("/projects/tools")}
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300"
-          >
-            View Project Tools
-          </button>
-        </div>
-      </div> */}
+      
     </div>
   );
 };
