@@ -179,6 +179,7 @@ import ForgetPassword from "../components/Signup/Forget_Password";
 import ResetPassword from "../components/Signup/Reset_passoward";
 import LeadEdit from "../pages/module/leadManagement/LeadEdit";
 import AddLead from "../pages/module/leadManagement/AddLead";
+import TermsAndConditions from "../pages/module/termsconditions/TermsAndConditions";
 
 // 🔒 Guard 1: Sirf logged-in users ke liye
 const ProtectedRoute = () => {
@@ -205,6 +206,7 @@ const PublicRoutes = () => {
           <Route path="/services/:id" element={<ServiceDetails />} />
           <Route path="/services/edit/:id" element={<EditService/>} />
           <Route path="/leadmanagement" element={<LeadManagement />} />
+          <Route path="/termconditions" element={<TermsAndConditions/>} />
           <Route path="/leadmanagement/add-lead" element={<AddLead/>} />
           <Route path="/leadmanagement/lead-details/:leadId" element={<LeadDetails />} />
           <Route path="leadmanagement/edit-lead/:id" element={<LeadEdit/>} />
