@@ -5,25 +5,6 @@ export default function AgentForm({ form, setForm, onSubmit, title }) {
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
       {/* Header / Breadcrumb */}
-      <div
-        className="bg-gradient-to-r from-[#F7941D] to-[#0072BC]
-        rounded-2xl p-6 shadow-lg mb-6"
-      >
-        <h1 className="text-xl font-semibold text-white">Add Agents</h1>
-
-        <div className="text-sm text-white flex items-center gap-2 mt-3">
-          <NavLink to="/dashboard" className="">
-            <LayoutDashboard size={16} />
-          </NavLink>
-          <span>&gt;</span>
-          <NavLink to="/agent" className="">
-            Agents Management
-          </NavLink>
-          <span>&gt;</span>
-          <span className=" font-medium">{title}</span>
-        </div>
-      </div>
-
       <div className="w-full">
         <div className="w-full bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
           <h2 className="text-xl font-semibold text-blue-600 mb-6 text-center">
