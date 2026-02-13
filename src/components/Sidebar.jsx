@@ -183,6 +183,19 @@ const Sidebar = ({ isOpen }) => {
           <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 text-orange-500 transform -translate-x-2 group-hover:translate-x-0 transition-all" />
         </NavLink>
 
+        {/* terms and conditions */}
+         <NavLink to="/termconditions"
+          className={({ isActive }) =>
+            `${baseLink} ${isActive ? active : inactive}`
+          }>
+          <div className="relative">
+            <FileText size={20} className="text-orange-500 group-hover:text-orange-600 group-hover:scale-110 transition-transform" />
+            <div className="absolute -inset-1 bg-orange-400/10 rounded-full blur-sm group-hover:blur-md transition-all"></div>
+          </div>
+          <span className="flex-1 text-sm font-medium">Terms and Conditions</span>
+          <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 text-orange-500 transform -translate-x-2 group-hover:translate-x-0 transition-all" />
+        </NavLink>
+
         <NavLink to="/setting"
           className={({ isActive }) =>
             `${baseLink} ${isActive ? active : inactive}`
